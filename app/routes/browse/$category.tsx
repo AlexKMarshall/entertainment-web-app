@@ -4,18 +4,24 @@ import { db } from '~/utils/db.server'
 
 type LoaderData = {
   categoryDisplay: string
+  media: { title: string; id: string }[]
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { category } = params
 
-  // if (typeof category !== 'string') {
-  //   throw new Response('Invalid category parameter', {status: 400})
-  // }
-
   const dbCategory = await db.category.findUnique({
     where: { name: category },
-    select: { display: true },
+    select: {
+      display: true,
+      media: {
+        take: 20,
+        select: {
+          title: true,
+          id: true,
+        },
+      },
+    },
   })
 
   if (!dbCategory) {
@@ -24,7 +30,10 @@ export const loader: LoaderFunction = async ({ params }) => {
     })
   }
 
-  const data: LoaderData = { categoryDisplay: dbCategory.display }
+  const data: LoaderData = {
+    categoryDisplay: dbCategory.display,
+    media: dbCategory.media,
+  }
   return json(data)
 }
 
@@ -33,6 +42,11 @@ export default function CatalogType(): JSX.Element {
   return (
     <main>
       <h1>{data.categoryDisplay}</h1>
+      <ul>
+        {data.media.map((mediaItem) => (
+          <li key={mediaItem.id}>{mediaItem.title}</li>
+        ))}
+      </ul>
     </main>
   )
 }

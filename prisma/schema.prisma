@@ -14,7 +14,7 @@ model Category {
   id      String  @id @default(uuid())
   name    String  @unique
   display String
-  Media   Media[]
+  media   Media[]
 }
 
 model Media {
