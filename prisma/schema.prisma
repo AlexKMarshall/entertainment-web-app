@@ -10,13 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Media {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  year      Int
-  category  String
-  rating    String
+model Category {
+  id      String  @id @default(uuid())
+  name    String  @unique
+  display String
+  Media   Media[]
+}
 
+model Media {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  title      String
+  year       Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  rating     String
 }

@@ -9,10 +9,10 @@ export default function Catalog() {
             <Link to="recommended">Recommended</Link>
           </li>
           <li>
-            <Link to="movies">Movies</Link>
+            <Link to="movie">Movies</Link>
           </li>
           <li>
-            <Link to="tv">TV Shows</Link>
+            <Link to="tv-series">TV Series</Link>
           </li>
         </ul>
       </nav>
