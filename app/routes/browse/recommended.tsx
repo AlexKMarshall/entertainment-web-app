@@ -3,6 +3,7 @@ import { LoaderFunction, json, useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
+  trending: { title: string; id: string }[]
   recommended: {
     title: string
     id: string
@@ -10,13 +11,24 @@ type LoaderData = {
 }
 
 export const loader: LoaderFunction = async () => {
-  const media = await db.media.findMany({
+  const recommendedQuery = db.media.findMany({
     take: 20,
     select: { id: true, title: true },
   })
+  const trendingQuery = db.media.findMany({
+    take: 20,
+    where: { isTrending: true },
+    select: { id: true, title: true },
+  })
+
+  const [recommended, trending] = await Promise.all([
+    recommendedQuery,
+    trendingQuery,
+  ])
 
   const data: LoaderData = {
-    recommended: media,
+    trending,
+    recommended,
   }
   return json(data)
 }
@@ -25,7 +37,13 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <main>
-      <h1>Recommended for you</h1>
+      <h2>Trending</h2>
+      <ul>
+        {data.trending.map((mediaItem) => (
+          <li key={mediaItem.id}>{mediaItem.title}</li>
+        ))}
+      </ul>
+      <h2>Recommended for you</h2>
       <ul>
         {data.recommended.map((mediaItem) => (
           <li key={mediaItem.id}>{mediaItem.title}</li>

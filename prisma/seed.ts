@@ -31,10 +31,11 @@ function getCategories() {
 }
 
 function getMedia() {
-  return mediaData.map(({ title, year, category, rating }) => ({
+  return mediaData.map(({ title, year, category, rating, isTrending }) => ({
     title,
     year,
     category,
     rating,
+    isTrending,
   }))
 }

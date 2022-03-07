@@ -26,4 +26,5 @@ model Media {
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
   rating     String
+  isTrending Boolean
 }
