@@ -1,14 +1,13 @@
 import { ElementType, ReactNode } from 'react'
+import clsx, { ClassValue } from 'clsx'
 
 import { LinksFunction } from 'remix'
-import headingStyles from './heading.css'
 
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: headingStyles },
-]
+export const links: LinksFunction = () => []
 
 type Props = {
   level: 1 | 2 | 3 | 4 | 5 | 6
+  size: 'l' | 'm' | 's' | 'xs'
   children: ReactNode
 }
 
@@ -21,7 +20,17 @@ const componentMap: Record<Props['level'], ElementType> = {
   6: 'h6',
 }
 
-export function Heading({ level, children }: Props): JSX.Element {
+const sizeClassesMap: Record<Props['size'], ClassValue> = {
+  l: ['font-size-500', 'font-weight-light'],
+  m: ['font-size-400', 'font-weight-light'],
+  s: ['font-size-400', 'font-weight-medium'],
+  xs: ['font-size-300', 'font-weight-medium'],
+}
+
+export function Heading({ level, size, children }: Props): JSX.Element {
   const Component = componentMap[level]
-  return <Component className="heading">{children}</Component>
+  const sizeClasses = sizeClassesMap[size]
+  const classNames = clsx(sizeClasses)
+
+  return <Component className={classNames}>{children}</Component>
 }

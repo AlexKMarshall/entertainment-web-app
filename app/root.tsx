@@ -10,6 +10,7 @@ import {
 import type { MetaFunction } from 'remix'
 import globalStyles from '~/styles/global.css'
 import resetStyles from '~/styles/reset.css'
+import utilityStyles from '~/styles/utilities.css'
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -24,6 +25,7 @@ export const links: LinksFunction = () => [
   },
   { rel: 'stylesheet', href: resetStyles },
   { rel: 'stylesheet', href: globalStyles },
+  { rel: 'stylesheet', href: utilityStyles },
 ]
 
 export const meta: MetaFunction = () => {

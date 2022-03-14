@@ -55,7 +55,9 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <main>
-      <Heading level={2}>Trending</Heading>
+      <Heading level={2} size="l">
+        Trending
+      </Heading>
 
       {data.trending.map((mediaItem) => (
         <MediaCard

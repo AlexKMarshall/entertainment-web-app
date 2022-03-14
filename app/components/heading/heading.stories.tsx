@@ -18,5 +18,28 @@ const Template: ComponentStory<typeof Heading> = (args) => <Heading {...args} />
 export const Large = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Large.args = {
+  level: 1,
+  size: 'l',
   children: 'Lorem ipsum dolor sit',
+}
+export const Medium = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Medium.args = {
+  level: 1,
+  size: 'm',
+  children: 'Consectetuer adipiscing elit',
+}
+export const Small = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Small.args = {
+  level: 1,
+  size: 's',
+  children: 'Donec odio quisque volutpat mattis eros',
+}
+export const ExtraSmall = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+ExtraSmall.args = {
+  level: 1,
+  size: 'xs',
+  children: 'Nullam malesuada erat ut turpis  ',
 }
