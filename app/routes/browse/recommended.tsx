@@ -1,4 +1,5 @@
-import { LoaderFunction, json, useLoaderData } from 'remix'
+import { Heading, links as headingLinks } from '~/components/heading'
+import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 
 import { Media } from '~/media'
 import { MediaCard } from '~/components/media-card'
@@ -8,6 +9,8 @@ type LoaderData = {
   trending: Media[]
   recommended: Media[]
 }
+
+export const links: LinksFunction = () => [...headingLinks()]
 
 export const loader: LoaderFunction = async () => {
   const selectMedia = {
@@ -52,7 +55,7 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <main>
-      <h2>Trending</h2>
+      <Heading level={2}>Trending</Heading>
 
       {data.trending.map((mediaItem) => (
         <MediaCard
