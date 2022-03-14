@@ -1,24 +1,33 @@
 import { LoaderFunction, json, useLoaderData } from 'remix'
 
+import { Media } from '~/media'
+import { MediaCard } from '~/components/media-card'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
-  trending: { title: string; id: string }[]
-  recommended: {
-    title: string
-    id: string
-  }[]
+  trending: Media[]
+  recommended: Media[]
 }
 
 export const loader: LoaderFunction = async () => {
+  const selectMedia = {
+    id: true,
+    title: true,
+    year: true,
+    rating: true,
+    category: {
+      select: { display: true },
+    },
+  }
+
   const recommendedQuery = db.media.findMany({
     take: 20,
-    select: { id: true, title: true },
+    select: selectMedia,
   })
   const trendingQuery = db.media.findMany({
     take: 20,
     where: { isTrending: true },
-    select: { id: true, title: true },
+    select: selectMedia,
   })
 
   const [recommended, trending] = await Promise.all([
@@ -27,8 +36,14 @@ export const loader: LoaderFunction = async () => {
   ])
 
   const data: LoaderData = {
-    trending,
-    recommended,
+    trending: trending.map((item) => ({
+      ...item,
+      category: item.category.display,
+    })),
+    recommended: recommended.map((item) => ({
+      ...item,
+      category: item.category.display,
+    })),
   }
   return json(data)
 }
@@ -38,17 +53,27 @@ export default function Recommended(): JSX.Element {
   return (
     <main>
       <h2>Trending</h2>
-      <ul>
-        {data.trending.map((mediaItem) => (
-          <li key={mediaItem.id}>{mediaItem.title}</li>
-        ))}
-      </ul>
+
+      {data.trending.map((mediaItem) => (
+        <MediaCard
+          key={mediaItem.id}
+          title={mediaItem.title}
+          year={mediaItem.year}
+          category={mediaItem.category}
+          rating={mediaItem.rating}
+        />
+      ))}
+
       <h2>Recommended for you</h2>
-      <ul>
-        {data.recommended.map((mediaItem) => (
-          <li key={mediaItem.id}>{mediaItem.title}</li>
-        ))}
-      </ul>
+      {data.recommended.map((mediaItem) => (
+        <MediaCard
+          key={mediaItem.id}
+          title={mediaItem.title}
+          year={mediaItem.year}
+          category={mediaItem.category}
+          rating={mediaItem.rating}
+        />
+      ))}
     </main>
   )
 }
