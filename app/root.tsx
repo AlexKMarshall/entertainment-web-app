@@ -8,10 +8,22 @@ import {
 } from 'remix'
 
 import type { MetaFunction } from 'remix'
+import globalStyles from '~/styles/global.css'
 import resetStyles from '~/styles/reset.css'
 
 export const links: LinksFunction = () => [
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap',
+  },
   { rel: 'stylesheet', href: resetStyles },
+  { rel: 'stylesheet', href: globalStyles },
 ]
 
 export const meta: MetaFunction = () => {
