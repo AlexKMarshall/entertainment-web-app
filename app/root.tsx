@@ -1,5 +1,18 @@
-import { Links, LiveReload, Meta, Outlet, ScrollRestoration } from 'remix'
+import {
+  Links,
+  LinksFunction,
+  LiveReload,
+  Meta,
+  Outlet,
+  ScrollRestoration,
+} from 'remix'
+
 import type { MetaFunction } from 'remix'
+import resetStyles from '~/styles/reset.css'
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: resetStyles },
+]
 
 export const meta: MetaFunction = () => {
   return { title: 'Entertainment App' }
