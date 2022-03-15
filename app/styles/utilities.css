@@ -1,7 +1,6 @@
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
-
 .font-weight-medium {
   font-weight: var(--font-weight-medium);
 }
@@ -20,4 +19,8 @@
 }
 .font-size-500 {
   font-size: var(--font-size-500);
+}
+
+.color-gray-400-75pc {
+  color: var(--gray-400-75pc);
 }
