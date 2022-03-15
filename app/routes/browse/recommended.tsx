@@ -73,7 +73,9 @@ export default function Recommended(): JSX.Element {
         />
       ))}
 
-      <h2>Recommended for you</h2>
+      <Heading level={2} size="m">
+        Recommended for you
+      </Heading>
       {data.recommended.map((mediaItem) => (
         <MediaCard
           key={mediaItem.id}

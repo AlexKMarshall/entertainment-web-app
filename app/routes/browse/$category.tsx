@@ -1,3 +1,4 @@
+import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
@@ -9,7 +10,10 @@ type LoaderData = {
   media: Media[]
 }
 
-export const links: LinksFunction = () => [...mediaCardLinks()]
+export const links: LinksFunction = () => [
+  ...mediaCardLinks(),
+  ...headingLinks(),
+]
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { category } = params
@@ -53,7 +57,9 @@ export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <main>
-      <h1>{data.categoryDisplay}</h1>
+      <Heading level={2} size="m">
+        {data.categoryDisplay}
+      </Heading>
 
       {data.media.map((mediaItem) => (
         <MediaCard
