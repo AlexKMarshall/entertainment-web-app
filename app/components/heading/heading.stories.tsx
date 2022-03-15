@@ -36,10 +36,3 @@ Small.args = {
   size: 's',
   children: 'Donec odio quisque volutpat mattis eros',
 }
-export const ExtraSmall = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ExtraSmall.args = {
-  level: 1,
-  size: 'xs',
-  children: 'Nullam malesuada erat ut turpis  ',
-}

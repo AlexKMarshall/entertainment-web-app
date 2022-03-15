@@ -7,7 +7,7 @@ export const links: LinksFunction = () => []
 
 type Props = {
   level: 1 | 2 | 3 | 4 | 5 | 6
-  size: 'l' | 'm' | 's' | 'xs'
+  size: 'l' | 'm' | 's'
   children: ReactNode
 }
 
@@ -22,9 +22,8 @@ const componentMap: Record<Props['level'], ElementType> = {
 
 const sizeClassesMap: Record<Props['size'], ClassValue> = {
   l: ['font-size-500', 'font-weight-light'],
-  m: ['font-size-400', 'font-weight-light'],
-  s: ['font-size-400', 'font-weight-medium'],
-  xs: ['font-size-300', 'font-weight-medium'],
+  m: ['font-size-400', 'font-weight-medium'],
+  s: ['font-size-300', 'font-weight-medium'],
 }
 
 export function Heading({ level, size, children }: Props): JSX.Element {
