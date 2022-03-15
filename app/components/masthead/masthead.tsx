@@ -1,14 +1,18 @@
 import { LinksFunction } from 'remix'
-import { Logo } from '~/components/icons'
+import { LogoIcon } from '~/components/icons'
+import { ReactNode } from 'react'
 import styles from './masthead.css'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
-type Props = {}
-export function Masthead(props: Props): JSX.Element {
+type Props = {
+  navigation: ReactNode
+}
+export function Masthead({ navigation }: Props): JSX.Element {
   return (
     <header className="masthead">
-      <Logo className="logo color-red-300" />
+      <LogoIcon className="logo color-red-300" />
+      {navigation}
     </header>
   )
 }

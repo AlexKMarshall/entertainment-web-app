@@ -1,25 +1,19 @@
-import { Link, LinksFunction, Outlet } from 'remix'
+import { LinksFunction, Outlet } from 'remix'
 import { Masthead, links as mastheadLinks } from '~/components/masthead'
+import {
+  PrimaryNavigation,
+  links as primaryNavigationLinks,
+} from '~/components/primary-navigation'
 
-export const links: LinksFunction = () => [...mastheadLinks()]
+export const links: LinksFunction = () => [
+  ...mastheadLinks(),
+  ...primaryNavigationLinks(),
+]
 
 export default function Catalog() {
   return (
     <>
-      <Masthead />
-      <nav>
-        <ul>
-          <li>
-            <Link to="recommended">Recommended</Link>
-          </li>
-          <li>
-            <Link to="movie">Movies</Link>
-          </li>
-          <li>
-            <Link to="tv-series">TV Series</Link>
-          </li>
-        </ul>
-      </nav>
+      <Masthead navigation={<PrimaryNavigation />} />
       <Outlet />
     </>
   )

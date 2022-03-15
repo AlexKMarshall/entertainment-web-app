@@ -1,0 +1,15 @@
+.primary-navigation {
+}
+
+.primary-navigation ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.primary-navigation svg {
+  width: 1.25rem;
+}
+
+.primary-navigation a {
+  color: var(--gray-300);
+}
