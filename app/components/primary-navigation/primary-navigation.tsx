@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { HomeIcon, MovieIcon, TVSeriesIcon } from '../icons'
-import { Link, LinksFunction } from 'remix'
+import { LinksFunction, NavLink } from 'remix'
 
 import styles from './primary-navigation.css'
 
@@ -12,22 +12,22 @@ export function PrimaryNavigation(props: Props): JSX.Element {
     <nav className="primary-navigation">
       <ul role="list">
         <li>
-          <Link to="recommended" className="nav-link">
+          <NavLink to="recommended">
             <HomeIcon className="nav-icon" />
             <span className="visually-hidden">Home</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="movie" className="nav-link">
+          <NavLink to="movie">
             <MovieIcon className="nav-icon" />
             <span className="visually-hidden">Movies</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="tv-series" className="nav-link">
+          <NavLink to="tv-series">
             <TVSeriesIcon className="nav-icon" />
             <span className="visually-hidden">TV Series</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>

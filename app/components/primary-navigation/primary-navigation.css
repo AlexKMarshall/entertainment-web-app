@@ -10,3 +10,7 @@
 .primary-navigation a {
   color: var(--gray-300);
 }
+
+.primary-navigation a[aria-current] {
+  color: var(--gray-400);
+}
