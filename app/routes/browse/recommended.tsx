@@ -1,8 +1,8 @@
 import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
 import { Media } from '~/media'
-import { MediaCard } from '~/components/media-card'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
@@ -10,7 +10,10 @@ type LoaderData = {
   recommended: Media[]
 }
 
-export const links: LinksFunction = () => [...headingLinks()]
+export const links: LinksFunction = () => [
+  ...headingLinks(),
+  ...mediaCardLinks(),
+]
 
 export const loader: LoaderFunction = async () => {
   const selectMedia = {
@@ -66,6 +69,7 @@ export default function Recommended(): JSX.Element {
           year={mediaItem.year}
           category={mediaItem.category}
           rating={mediaItem.rating}
+          isTrending={true}
         />
       ))}
 

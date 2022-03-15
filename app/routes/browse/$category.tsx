@@ -1,13 +1,15 @@
-import { LoaderFunction, json, useLoaderData } from 'remix'
+import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
 import { Media } from '~/media'
-import { MediaCard } from '~/components/media-card'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
   categoryDisplay: string
   media: Media[]
 }
+
+export const links: LinksFunction = () => [...mediaCardLinks()]
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { category } = params
