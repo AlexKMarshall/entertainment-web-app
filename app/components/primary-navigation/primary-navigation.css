@@ -1,6 +1,7 @@
 .primary-navigation ul {
-  display: flex;
-  gap: 1.5rem;
+  --switcher-space: 1.5rem;
+  --switcher-threshold: 12rem;
+  justify-content: center;
 }
 
 .primary-navigation svg {

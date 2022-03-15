@@ -10,7 +10,7 @@ type Props = {}
 export function PrimaryNavigation(props: Props): JSX.Element {
   return (
     <nav className="primary-navigation">
-      <ul role="list">
+      <ul role="list" className="switcher">
         <li>
           <NavLink to="recommended">
             <HomeIcon className="nav-icon" />
