@@ -1,8 +1,8 @@
 import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import { Media, getImageBase } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
-import { Media } from '~/media'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
@@ -24,6 +24,7 @@ export const loader: LoaderFunction = async () => {
     category: {
       select: { display: true },
     },
+    image: true,
   }
 
   const recommendedQuery = db.media.findMany({
@@ -45,10 +46,12 @@ export const loader: LoaderFunction = async () => {
     trending: trending.map((item) => ({
       ...item,
       category: item.category.display,
+      imageBase: getImageBase(item.image),
     })),
     recommended: recommended.map((item) => ({
       ...item,
       category: item.category.display,
+      imageBase: getImageBase(item.image),
     })),
   }
   return json(data)

@@ -31,11 +31,26 @@ function getCategories() {
 }
 
 function getMedia() {
-  return mediaData.map(({ title, year, category, rating, isTrending }) => ({
-    title,
-    year,
-    category,
-    rating,
-    isTrending,
-  }))
+  return mediaData.map(
+    ({
+      title,
+      year,
+      category,
+      rating,
+      isTrending,
+      thumbnail: {
+        regular: { small },
+      },
+    }) => {
+      const image = small.split('/')[3]
+      return {
+        title,
+        year,
+        category,
+        rating,
+        isTrending,
+        image,
+      }
+    }
+  )
 }
