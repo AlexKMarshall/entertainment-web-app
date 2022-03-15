@@ -1,11 +1,12 @@
-import { Link, Outlet } from 'remix'
+import { Link, LinksFunction, Outlet } from 'remix'
+import { Masthead, links as mastheadLinks } from '~/components/masthead'
 
-import { Logo } from '~/components/icons'
+export const links: LinksFunction = () => [...mastheadLinks()]
 
 export default function Catalog() {
   return (
     <>
-      <Logo />
+      <Masthead />
       <nav>
         <ul>
           <li>

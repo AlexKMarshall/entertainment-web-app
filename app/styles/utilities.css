@@ -25,6 +25,10 @@
   color: var(--gray-400-75pc);
 }
 
+.color-red-300 {
+  color: var(--red-300);
+}
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
