@@ -1,8 +1,8 @@
 import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
-import { Media, getImageBase } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
+import { Media } from '~/media'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
@@ -49,7 +49,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     media: dbCategory.media.map((item) => ({
       ...item,
       category: item.category.display,
-      imageBase: getImageBase(item.image),
+      imageSlug: item.image,
     })),
   }
   return json(data)
@@ -70,6 +70,7 @@ export default function CatalogType(): JSX.Element {
           year={mediaItem.year}
           category={mediaItem.category}
           rating={mediaItem.rating}
+          imageSlug={mediaItem.imageSlug}
         />
       ))}
     </main>
