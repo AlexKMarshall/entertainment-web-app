@@ -23,3 +23,19 @@
   height: auto;
   width: 100%;
 }
+
+@media screen and (min-width: 768px) {
+  .media-card img {
+    aspect-ratio: 440 / 280;
+  }
+
+  .media-card[data-trending] img {
+    aspect-ratio: 940 / 460;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .media-card img {
+    aspect-ratio: 560 / 348;
+  }
+}

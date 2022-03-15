@@ -29,7 +29,10 @@ export function MediaCard({
   isTrending = false,
 }: Props): JSX.Element {
   return (
-    <article className="media-card">
+    <article
+      className="media-card"
+      {...(isTrending ? { 'data-trending': true } : {})}
+    >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
       <MediaMeta
         year={year}
