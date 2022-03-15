@@ -1,8 +1,11 @@
 import { Link, Outlet } from 'remix'
 
+import { Logo } from '~/components/icons'
+
 export default function Catalog() {
   return (
     <>
+      <Logo />
       <nav>
         <ul>
           <li>
