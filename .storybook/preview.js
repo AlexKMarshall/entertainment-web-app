@@ -10,5 +10,9 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: {
+    default: 'dark',
+    values: [{ name: 'dark', value: 'hsl(223deg 30% 9%)' }],
+  },
   chromatic: { viewports: [375, 768, 1440] },
 }

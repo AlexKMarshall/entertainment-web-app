@@ -5,7 +5,7 @@ type Props = { children: ReactNode; size: 'm' | 's'; component?: ElementType }
 
 const sizeClassMap: Record<Props['size'], ClassValue> = {
   m: 'font-size-200',
-  s: 'font-size-100',
+  s: ['font-size-100', 'color-gray-400-75pc'],
 }
 
 export function BodyText({
