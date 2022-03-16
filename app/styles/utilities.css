@@ -1,11 +1,21 @@
 :root {
   --font-weight-light: 300;
   --font-weight-medium: 500;
-  --font-size-100: 0.8125rem;
-  --font-size-200: 0.9375rem;
-  --font-size-300: 1.125rem;
-  --font-size-400: 1.5rem;
-  --font-size-500: 2rem;
+  --font-size-100: 0.6875rem;
+  --font-size-200: 0.75rem;
+  --font-size-300: 0.875rem;
+  --font-size-400: 0.9375rem;
+  --font-size-500: 1.25rem;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --font-size-100: 0.8125rem;
+    --font-size-200: 0.9375rem;
+    --font-size-300: 1.125rem;
+    --font-size-400: 1.5rem;
+    --font-size-500: 2rem;
+  }
 }
 
 .font-weight-light {
