@@ -1,7 +1,8 @@
 .primary-navigation ul {
   --switcher-space: 1.5rem;
   --switcher-threshold: 12rem;
-  justify-content: center;
+  --default-justify: center;
+  justify-content: var(--nav-justify, var(--default-justify));
   align-items: center;
 }
 

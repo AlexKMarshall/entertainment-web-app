@@ -18,3 +18,10 @@
     font-size: 2rem;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .masthead {
+    flex-direction: column;
+    --nav-justify: flex-start;
+  }
+}
