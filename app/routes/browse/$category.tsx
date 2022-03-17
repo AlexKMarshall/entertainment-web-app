@@ -1,13 +1,19 @@
-import { LoaderFunction, json, useLoaderData } from 'remix'
+import { Heading, links as headingLinks } from '~/components/heading'
+import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 
 import { Media } from '~/media'
-import { MediaCard } from '~/components/media-card'
 import { db } from '~/utils/db.server'
 
 type LoaderData = {
   categoryDisplay: string
   media: Media[]
 }
+
+export const links: LinksFunction = () => [
+  ...mediaCardLinks(),
+  ...headingLinks(),
+]
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { category } = params
@@ -26,6 +32,7 @@ export const loader: LoaderFunction = async ({ params }) => {
           category: {
             select: { display: true },
           },
+          image: true,
         },
       },
     },
@@ -42,6 +49,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     media: dbCategory.media.map((item) => ({
       ...item,
       category: item.category.display,
+      imageSlug: item.image,
     })),
   }
   return json(data)
@@ -51,7 +59,9 @@ export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <main>
-      <h1>{data.categoryDisplay}</h1>
+      <Heading level={2} size="m">
+        {data.categoryDisplay}
+      </Heading>
 
       {data.media.map((mediaItem) => (
         <MediaCard
@@ -60,6 +70,7 @@ export default function CatalogType(): JSX.Element {
           year={mediaItem.year}
           category={mediaItem.category}
           rating={mediaItem.rating}
+          imageSlug={mediaItem.imageSlug}
         />
       ))}
     </main>

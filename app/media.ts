@@ -4,4 +4,5 @@ export type Media = {
   category: string
   rating: string
   id: string
+  imageSlug: string
 }
