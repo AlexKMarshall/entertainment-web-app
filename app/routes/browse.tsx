@@ -18,11 +18,15 @@ export const links: LinksFunction = () => [
 export default function Catalog() {
   return (
     <div className="browse">
-      <Masthead
-        navigation={<PrimaryNavigation />}
-        avatar={<Avatar src="/assets/image-avatar.png" />}
-      />
-      <Outlet />
+      <header>
+        <Masthead
+          navigation={<PrimaryNavigation />}
+          avatar={<Avatar src="/assets/image-avatar.png" />}
+        />
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </div>
   )
 }

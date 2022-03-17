@@ -11,10 +11,10 @@ type Props = {
 }
 export function Masthead({ navigation, avatar }: Props): JSX.Element {
   return (
-    <header className="masthead">
+    <div className="masthead">
       <LogoIcon className="logo color-red-300" />
       {navigation}
       {avatar}
-    </header>
+    </div>
   )
 }
