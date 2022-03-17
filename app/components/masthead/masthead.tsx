@@ -7,12 +7,14 @@ export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
 type Props = {
   navigation: ReactNode
+  avatar: ReactNode
 }
-export function Masthead({ navigation }: Props): JSX.Element {
+export function Masthead({ navigation, avatar }: Props): JSX.Element {
   return (
     <header className="masthead">
       <LogoIcon className="logo color-red-300" />
       {navigation}
+      {avatar}
     </header>
   )
 }

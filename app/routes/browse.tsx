@@ -1,3 +1,4 @@
+import { Avatar, links as avatarLinks } from '~/components/avatar'
 import { LinksFunction, Outlet } from 'remix'
 import { Masthead, links as mastheadLinks } from '~/components/masthead'
 import {
@@ -8,12 +9,16 @@ import {
 export const links: LinksFunction = () => [
   ...mastheadLinks(),
   ...primaryNavigationLinks(),
+  ...avatarLinks(),
 ]
 
 export default function Catalog() {
   return (
     <>
-      <Masthead navigation={<PrimaryNavigation />} />
+      <Masthead
+        navigation={<PrimaryNavigation />}
+        avatar={<Avatar src="/assets/image-avatar.png" />}
+      />
       <Outlet />
     </>
   )
