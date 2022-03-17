@@ -6,7 +6,10 @@ import {
   links as primaryNavigationLinks,
 } from '~/components/primary-navigation'
 
+import styles from '~/styles/routes/browse.css'
+
 export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: styles },
   ...mastheadLinks(),
   ...primaryNavigationLinks(),
   ...avatarLinks(),
@@ -14,12 +17,12 @@ export const links: LinksFunction = () => [
 
 export default function Catalog() {
   return (
-    <>
+    <div className="browse">
       <Masthead
         navigation={<PrimaryNavigation />}
         avatar={<Avatar src="/assets/image-avatar.png" />}
       />
       <Outlet />
-    </>
+    </div>
   )
 }

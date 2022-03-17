@@ -1,0 +1,15 @@
+.browse {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .browse {
+    flex-direction: row;
+  }
+  main {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+}
