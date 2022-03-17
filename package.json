@@ -14,7 +14,8 @@
     "start": "cross-env NODE_ENV=production remix-serve build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic",
+    "docker": "docker-compose up -d"
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",
