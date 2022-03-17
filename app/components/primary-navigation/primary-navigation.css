@@ -2,6 +2,12 @@
   --switcher-space: 1.5rem;
   --switcher-threshold: 12rem;
   justify-content: center;
+  align-items: center;
+}
+
+.primary-navigation li {
+  display: grid;
+  place-items: center;
 }
 
 .primary-navigation svg {
@@ -10,6 +16,7 @@
 
 .primary-navigation a {
   color: var(--gray-300);
+  display: block;
 }
 
 .primary-navigation a[aria-current] {

@@ -1,6 +1,12 @@
 .masthead {
   padding: 1rem;
   background-color: var(--gray-200);
+  display: flex;
+  align-items: center;
+}
+
+.masthead > :nth-child(2) {
+  flex-grow: 1;
 }
 
 .masthead .logo {
