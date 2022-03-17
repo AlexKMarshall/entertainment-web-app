@@ -1,9 +1,12 @@
 .primary-navigation ul {
-  --switcher-space: 1.5rem;
-  --switcher-threshold: 12rem;
+  --space: 1.5rem;
+  --default-direction: row;
   --default-justify: center;
+  display: flex;
+  flex-direction: var(--nav-direction, var(--default-direction));
   justify-content: var(--nav-justify, var(--default-justify));
   align-items: center;
+  gap: var(--space);
 }
 
 .primary-navigation li {
@@ -26,7 +29,7 @@
 
 @media screen and (min-width: 768px) {
   .primary-navigation ul {
-    --switcher-space: 2rem;
+    --space: 2rem;
   }
 
   .primary-navigation svg {
@@ -36,6 +39,6 @@
 
 @media screen and (min-width: 1024px) {
   .primary-navigation ul {
-    --switcher-space: 2.5rem;
+    --space: 2.5rem;
   }
 }

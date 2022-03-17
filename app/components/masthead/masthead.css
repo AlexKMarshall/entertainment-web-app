@@ -22,6 +22,8 @@
 @media screen and (min-width: 1024px) {
   .masthead {
     flex-direction: column;
+    --nav-direction: column;
     --nav-justify: flex-start;
+    gap: 4.5rem;
   }
 }
