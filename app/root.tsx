@@ -29,7 +29,10 @@ export const links: LinksFunction = () => [
 ]
 
 export const meta: MetaFunction = () => {
-  return { title: 'Entertainment App' }
+  return {
+    title: 'Entertainment App',
+    description: 'Browse and watch movies and TV shows in one place',
+  }
 }
 
 export default function App() {
