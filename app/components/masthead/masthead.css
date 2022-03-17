@@ -1,3 +1,8 @@
+.masthead {
+  padding: 1rem;
+  background-color: var(--gray-200);
+}
+
 .masthead .logo {
   font-size: 1.5rem;
 }

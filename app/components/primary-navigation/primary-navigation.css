@@ -5,7 +5,7 @@
 }
 
 .primary-navigation svg {
-  width: 1.25rem;
+  width: 1rem;
 }
 
 .primary-navigation a {
@@ -14,4 +14,20 @@
 
 .primary-navigation a[aria-current] {
   color: var(--gray-400);
+}
+
+@media screen and (min-width: 768px) {
+  .primary-navigation ul {
+    --switcher-space: 2rem;
+  }
+
+  .primary-navigation svg {
+    width: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .primary-navigation ul {
+    --switcher-space: 2.5rem;
+  }
 }
