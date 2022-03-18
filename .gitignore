@@ -5,6 +5,8 @@ node_modules
 /public/build
 .log
 .env
+.vercel
+.output
 
 /prisma/dev.db
 postgres-data
