@@ -1,6 +1,7 @@
 import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
+import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
@@ -13,6 +14,7 @@ type LoaderData = {
 export const links: LinksFunction = () => [
   ...headingLinks(),
   ...mediaCardLinks(),
+  ...mediaGridLinks(),
 ]
 
 export const loader: LoaderFunction = async () => {
@@ -65,31 +67,35 @@ export default function Recommended(): JSX.Element {
         Trending
       </Heading>
 
-      {data.trending.map((mediaItem) => (
-        <MediaCard
-          key={mediaItem.id}
-          title={mediaItem.title}
-          year={mediaItem.year}
-          category={mediaItem.category}
-          rating={mediaItem.rating}
-          imageSlug={mediaItem.imageSlug}
-          isTrending={true}
-        />
-      ))}
+      <MediaGrid>
+        {data.trending.map((mediaItem) => (
+          <MediaCard
+            key={mediaItem.id}
+            title={mediaItem.title}
+            year={mediaItem.year}
+            category={mediaItem.category}
+            rating={mediaItem.rating}
+            imageSlug={mediaItem.imageSlug}
+            isTrending={true}
+          />
+        ))}
+      </MediaGrid>
 
-      <Heading level={2} size="m">
+      <Heading level={2} size="l">
         Recommended for you
       </Heading>
-      {data.recommended.map((mediaItem) => (
-        <MediaCard
-          key={mediaItem.id}
-          title={mediaItem.title}
-          year={mediaItem.year}
-          category={mediaItem.category}
-          rating={mediaItem.rating}
-          imageSlug={mediaItem.imageSlug}
-        />
-      ))}
+      <MediaGrid>
+        {data.recommended.map((mediaItem) => (
+          <MediaCard
+            key={mediaItem.id}
+            title={mediaItem.title}
+            year={mediaItem.year}
+            category={mediaItem.category}
+            rating={mediaItem.rating}
+            imageSlug={mediaItem.imageSlug}
+          />
+        ))}
+      </MediaGrid>
     </div>
   )
 }

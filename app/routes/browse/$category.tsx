@@ -1,6 +1,7 @@
 import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
+import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
@@ -13,6 +14,7 @@ type LoaderData = {
 export const links: LinksFunction = () => [
   ...mediaCardLinks(),
   ...headingLinks(),
+  ...mediaGridLinks(),
 ]
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -58,21 +60,23 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
-    <main>
+    <div>
       <Heading level={2} size="m">
         {data.categoryDisplay}
       </Heading>
 
-      {data.media.map((mediaItem) => (
-        <MediaCard
-          key={mediaItem.id}
-          title={mediaItem.title}
-          year={mediaItem.year}
-          category={mediaItem.category}
-          rating={mediaItem.rating}
-          imageSlug={mediaItem.imageSlug}
-        />
-      ))}
-    </main>
+      <MediaGrid>
+        {data.media.map((mediaItem) => (
+          <MediaCard
+            key={mediaItem.id}
+            title={mediaItem.title}
+            year={mediaItem.year}
+            category={mediaItem.category}
+            rating={mediaItem.rating}
+            imageSlug={mediaItem.imageSlug}
+          />
+        ))}
+      </MediaGrid>
+    </div>
   )
 }
