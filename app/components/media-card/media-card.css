@@ -22,6 +22,7 @@
   object-fit: cover;
   height: auto;
   width: 100%;
+  border-radius: 8px;
 }
 
 @media screen and (min-width: 768px) {
