@@ -15,7 +15,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "setup:db": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",
