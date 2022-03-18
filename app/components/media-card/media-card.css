@@ -1,6 +1,5 @@
 .media-card {
   --meta-gap: 0.375rem;
-  max-width: 300px;
   position: relative;
 }
 

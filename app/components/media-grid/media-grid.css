@@ -1,5 +1,28 @@
 .media-grid {
+  --media-grid-min-width: 125px;
+  --media-grid-row-gap: 1rem;
+  --media-grid-column-gap: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--media-grid-min-width), 1fr)
+  );
+  row-gap: var(--media-grid-row-gap);
+  column-gap: var(--media-grid-column-gap);
+}
+
+@media screen and (min-width: 768px) {
+  .media-grid {
+    --media-grid-min-width: 200px;
+    --media-grid-row-gap: 1.5rem;
+    --media-grid-column-gap: 1.75rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .media-grid {
+    --media-grid-min-width: 250px;
+    --media-grid-row-gap: 2rem;
+    --media-grid-column-gap: 2.5rem;
+  }
 }
