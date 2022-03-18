@@ -18,6 +18,7 @@
   --gray-400-hsl: 223deg 0% 100%;
   --gray-400: hsl(var(--gray-400-hsl));
   --gray-400-75pc: hsl(var(--gray-400-hsl) / 0.75);
+  --red-300: hsl(0deg 97% 63%);
 }
 
 @media screen and (min-width: 768px) {

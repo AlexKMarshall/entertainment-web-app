@@ -1,0 +1,40 @@
+.browse {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.browse main {
+  padding: 1.5rem 1rem 2.375rem;
+  flex-grow: 1;
+}
+
+.browse header {
+  display: flex;
+}
+
+.browse header > * {
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .browse main {
+    padding: 2rem 1.5rem 3.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .browse {
+    flex-direction: row;
+  }
+
+  .browse > header {
+    padding-block: 2rem;
+    padding-inline-start: 2rem;
+  }
+
+  .browse main {
+    padding: 4rem 3.125rem 2.35rem;
+    overflow-y: auto;
+  }
+}

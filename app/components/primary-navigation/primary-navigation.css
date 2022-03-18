@@ -1,0 +1,44 @@
+.primary-navigation ul {
+  --space: 1.5rem;
+  --default-direction: row;
+  --default-justify: center;
+  display: flex;
+  flex-direction: var(--nav-direction, var(--default-direction));
+  justify-content: var(--nav-justify, var(--default-justify));
+  align-items: center;
+  gap: var(--space);
+}
+
+.primary-navigation li {
+  display: grid;
+  place-items: center;
+}
+
+.primary-navigation svg {
+  width: 1rem;
+}
+
+.primary-navigation a {
+  color: var(--gray-300);
+  display: block;
+}
+
+.primary-navigation a[aria-current] {
+  color: var(--gray-400);
+}
+
+@media screen and (min-width: 768px) {
+  .primary-navigation ul {
+    --space: 2rem;
+  }
+
+  .primary-navigation svg {
+    width: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .primary-navigation ul {
+    --space: 2.5rem;
+  }
+}

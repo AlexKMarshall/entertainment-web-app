@@ -1,3 +1,13 @@
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--switcher-space);
+}
+
+.switcher > * {
+  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
+}
+
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
@@ -23,6 +33,9 @@
 
 .color-gray-400-75pc {
   color: var(--gray-400-75pc);
+}
+.color-red-300 {
+  color: var(--red-300);
 }
 
 .visually-hidden {
