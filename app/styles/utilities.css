@@ -1,10 +1,3 @@
-.stack {
-  --stack-space: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--stack-space);
-}
-
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
