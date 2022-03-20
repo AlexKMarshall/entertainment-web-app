@@ -9,6 +9,8 @@
   padding-block-start: 1.5rem;
   padding-block-end: 2.375rem;
   flex-grow: 1;
+  --media-reel-padding-inline: var(--center-container-gutter);
+  --media-reel-gap: 1rem;
 }
 
 .browse header {
@@ -42,16 +44,5 @@
     padding-block-start: 4rem;
     padding-block-end: 2.35rem;
     overflow-y: auto;
-  }
-}
-
-.browse .media-reel {
-  --media-reel-padding-inline: var(--center-container-gutter);
-  --media-reel-gap: 1rem;
-}
-
-@media screen and (min-width: 768px) {
-  .browse .media-reel {
-    --media-reel-gap: 2.5rem;
   }
 }
