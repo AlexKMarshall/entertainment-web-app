@@ -64,7 +64,7 @@ export const loader: LoaderFunction = async () => {
 export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
-    <div>
+    <>
       <Heading level={2} size="l">
         Trending
       </Heading>
@@ -98,6 +98,6 @@ export default function Recommended(): JSX.Element {
           />
         ))}
       </MediaGrid>
-    </div>
+    </>
   )
 }

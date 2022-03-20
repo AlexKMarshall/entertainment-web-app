@@ -60,7 +60,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
-    <div>
+    <>
       <Heading level={2} size="m">
         {data.categoryDisplay}
       </Heading>
@@ -77,6 +77,6 @@ export default function CatalogType(): JSX.Element {
           />
         ))}
       </MediaGrid>
-    </div>
+    </>
   )
 }
