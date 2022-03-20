@@ -1,14 +1,18 @@
 .media-reel {
-  --media-reel-space: 1rem;
+  --_media-reel-padding-inline: var(--media-reel-padding-inline, 1rem);
+  --_media-reel-gap: var(--media-reel-gap, 1rem);
   display: flex;
   overflow-x: auto;
-  gap: var(--media-reel-space);
+  gap: var(--_media-reel-gap);
 }
 
-@media screen and (min-width: 768px) {
-  .media-reel {
-    --media-reel-space: 2.5rem;
-  }
+.media-reel::after,
+.media-reel::before {
+  content: '';
+  flex-basis: calc(
+    var(--_media-reel-padding-inline) - var(--_media-reel-space)
+  );
+  flex-shrink: 0;
 }
 
 .media-reel > * {

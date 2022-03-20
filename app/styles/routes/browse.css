@@ -44,3 +44,14 @@
     overflow-y: auto;
   }
 }
+
+.browse .media-reel {
+  --media-reel-padding-inline: var(--center-container-gutter);
+  --media-reel-gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .browse .media-reel {
+    --media-reel-gap: 2.5rem;
+  }
+}
