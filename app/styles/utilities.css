@@ -1,3 +1,15 @@
+.center-container {
+  --_center-container-gutter: var(--center-container-gutter, 1rem);
+  display: grid;
+  grid-template-columns: var(--_center-container-gutter) 1fr var(
+      --_center-container-gutter
+    );
+}
+
+.center-container > * {
+  grid-column: 2;
+}
+
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
