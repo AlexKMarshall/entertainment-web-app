@@ -69,19 +69,21 @@ export default function Recommended(): JSX.Element {
         Trending
       </Heading>
 
-      <MediaReel>
-        {data.trending.map((mediaItem) => (
-          <MediaCard
-            key={mediaItem.id}
-            title={mediaItem.title}
-            year={mediaItem.year}
-            category={mediaItem.category}
-            rating={mediaItem.rating}
-            imageSlug={mediaItem.imageSlug}
-            isTrending={true}
-          />
-        ))}
-      </MediaReel>
+      <div className="full-bleed">
+        <MediaReel>
+          {data.trending.map((mediaItem) => (
+            <MediaCard
+              key={mediaItem.id}
+              title={mediaItem.title}
+              year={mediaItem.year}
+              category={mediaItem.category}
+              rating={mediaItem.rating}
+              imageSlug={mediaItem.imageSlug}
+              isTrending={true}
+            />
+          ))}
+        </MediaReel>
+      </div>
 
       <Heading level={2} size="l">
         Recommended for you

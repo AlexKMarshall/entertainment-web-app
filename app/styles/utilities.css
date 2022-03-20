@@ -10,6 +10,10 @@
   grid-column: 2;
 }
 
+.full-bleed {
+  grid-column: 1 /-1;
+}
+
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
