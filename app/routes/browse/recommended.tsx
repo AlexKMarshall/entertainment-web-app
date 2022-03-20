@@ -2,6 +2,7 @@ import { Heading, links as headingLinks } from '~/components/heading'
 import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
+import { MediaReel, links as mediaReelLinks } from '~/components/media-reel'
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
@@ -15,6 +16,7 @@ export const links: LinksFunction = () => [
   ...headingLinks(),
   ...mediaCardLinks(),
   ...mediaGridLinks(),
+  ...mediaReelLinks(),
 ]
 
 export const loader: LoaderFunction = async () => {
@@ -67,7 +69,7 @@ export default function Recommended(): JSX.Element {
         Trending
       </Heading>
 
-      <MediaGrid>
+      <MediaReel>
         {data.trending.map((mediaItem) => (
           <MediaCard
             key={mediaItem.id}
@@ -79,7 +81,7 @@ export default function Recommended(): JSX.Element {
             isTrending={true}
           />
         ))}
-      </MediaGrid>
+      </MediaReel>
 
       <Heading level={2} size="l">
         Recommended for you

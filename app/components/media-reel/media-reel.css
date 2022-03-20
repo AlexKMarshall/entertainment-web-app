@@ -1,0 +1,16 @@
+.media-reel {
+  --media-reel-space: 1rem;
+  display: flex;
+  overflow-x: auto;
+  gap: var(--media-reel-space);
+}
+
+@media screen and (min-width: 768px) {
+  .media-reel {
+    --media-reel-space: 2.5rem;
+  }
+}
+
+.media-reel > * {
+  flex-shrink: 0;
+}
