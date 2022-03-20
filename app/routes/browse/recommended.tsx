@@ -65,13 +65,33 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <>
-      <Heading level={2} size="l">
-        Trending
-      </Heading>
+      <div className="full-bleed center-container">
+        <Heading level={2} size="l">
+          Trending
+        </Heading>
+        <div className="full-bleed">
+          <MediaReel>
+            {data.trending.map((mediaItem) => (
+              <MediaCard
+                key={mediaItem.id}
+                title={mediaItem.title}
+                year={mediaItem.year}
+                category={mediaItem.category}
+                rating={mediaItem.rating}
+                imageSlug={mediaItem.imageSlug}
+                isTrending={true}
+              />
+            ))}
+          </MediaReel>
+        </div>
+      </div>
 
-      <div className="full-bleed">
-        <MediaReel>
-          {data.trending.map((mediaItem) => (
+      <div className="stack">
+        <Heading level={2} size="l">
+          Recommended for you
+        </Heading>
+        <MediaGrid>
+          {data.recommended.map((mediaItem) => (
             <MediaCard
               key={mediaItem.id}
               title={mediaItem.title}
@@ -79,27 +99,10 @@ export default function Recommended(): JSX.Element {
               category={mediaItem.category}
               rating={mediaItem.rating}
               imageSlug={mediaItem.imageSlug}
-              isTrending={true}
             />
           ))}
-        </MediaReel>
+        </MediaGrid>
       </div>
-
-      <Heading level={2} size="l">
-        Recommended for you
-      </Heading>
-      <MediaGrid>
-        {data.recommended.map((mediaItem) => (
-          <MediaCard
-            key={mediaItem.id}
-            title={mediaItem.title}
-            year={mediaItem.year}
-            category={mediaItem.category}
-            rating={mediaItem.rating}
-            imageSlug={mediaItem.imageSlug}
-          />
-        ))}
-      </MediaGrid>
     </>
   )
 }

@@ -11,6 +11,7 @@
   flex-grow: 1;
   --media-reel-padding-inline: var(--center-container-gutter);
   --media-reel-gap: 1rem;
+  row-gap: 2rem;
 }
 
 .browse header {
