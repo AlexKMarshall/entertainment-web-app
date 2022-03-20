@@ -9,9 +9,7 @@
 .media-reel::after,
 .media-reel::before {
   content: '';
-  flex-basis: calc(
-    var(--_media-reel-padding-inline) - var(--_media-reel-space)
-  );
+  flex-basis: calc(var(--_media-reel-padding-inline) - var(--_media-reel-gap));
   flex-shrink: 0;
 }
 
