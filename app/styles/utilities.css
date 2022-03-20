@@ -1,13 +1,3 @@
-.switcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--switcher-space);
-}
-
-.switcher > * {
-  flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
-}
-
 .font-weight-light {
   font-weight: var(--font-weight-light);
 }
