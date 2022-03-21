@@ -1,7 +1,8 @@
+import { MovieIcon, TVSeriesIcon } from '../icons'
+
 import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
 import { LinksFunction } from 'remix'
-import { ReactNode } from 'react'
 import styles from './media-card.css'
 
 type Props = {
@@ -49,9 +50,20 @@ export function MediaCard({
   )
 }
 
+function getCategoryIcon(category: string): JSX.Element {
+  switch (category) {
+    case 'Movie':
+      return <MovieIcon />
+    case 'TV Series':
+      return <TVSeriesIcon />
+    default:
+      return <></>
+  }
+}
+
 type MediaMetaProps = {
   year: number
-  category: string | ReactNode
+  category: string
   rating: string
   size: 'm' | 's'
 }
@@ -69,7 +81,7 @@ function MediaMeta({
       </BodyText>
       <dt className="visually-hidden">Category</dt>
       <BodyText component="dd" size={size}>
-        {category}
+        {getCategoryIcon(category)} {category}
       </BodyText>
       <dt className="visually-hidden">Age rating</dt>
       <BodyText component="dd" size={size}>
