@@ -114,13 +114,15 @@ function MediaImage({ imageSlug, isTrending }: MediaImageProps): JSX.Element {
   const height = isTrending ? 140 : 110
 
   return (
-    <img
-      srcSet={srcSet}
-      sizes={sizes}
-      src={`${imageBasePath}/small.jpg`}
-      alt=""
-      width={width}
-      height={height}
-    />
+    <div className="image-wrapper">
+      <img
+        srcSet={srcSet}
+        sizes={sizes}
+        src={`${imageBasePath}/small.jpg`}
+        alt=""
+        width={width}
+        height={height}
+      />
+    </div>
   )
 }
