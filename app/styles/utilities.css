@@ -1,23 +1,17 @@
-.center-container {
-  --_center-container-gutter: var(--center-container-gutter, 1rem);
-  display: grid;
-  grid-template-columns: var(--_center-container-gutter) 1fr var(
-      --_center-container-gutter
-    );
-}
-
-.center-container > * {
-  grid-column: 2;
+.container {
+  --_container-padding-inline: var(--container-padding-inline, 1rem);
+  padding-inline: var(--_container-padding-inline);
 }
 
 .full-bleed {
-  grid-column: 1 /-1;
+  margin-inline: calc(var(--_container-padding-inline) * -1);
 }
 
 .stack {
+  --_stack-gap: var(--stack-gap, 1.5rem);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--_stack-gap);
 }
 
 .font-weight-light {
