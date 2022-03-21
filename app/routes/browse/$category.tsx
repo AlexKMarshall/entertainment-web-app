@@ -65,8 +65,9 @@ export default function CatalogType(): JSX.Element {
         {data.categoryDisplay}
       </Heading>
 
-      <MediaGrid>
-        {data.media.map((mediaItem) => (
+      <MediaGrid
+        items={data.media}
+        renderItem={(mediaItem) => (
           <MediaCard
             key={mediaItem.id}
             title={mediaItem.title}
@@ -75,8 +76,8 @@ export default function CatalogType(): JSX.Element {
             rating={mediaItem.rating}
             imageSlug={mediaItem.imageSlug}
           />
-        ))}
-      </MediaGrid>
+        )}
+      />
     </div>
   )
 }
