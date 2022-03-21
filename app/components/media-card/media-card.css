@@ -16,7 +16,7 @@
   isolation: isolate;
   grid-area: image;
   align-self: end;
-  padding: 1rem;
+  padding: var(--space-s-s);
 }
 
 @media screen and (min-width: 768px) {
@@ -57,13 +57,6 @@
     hsl(var(--gray-100-hsl) / 75%)
   );
 }
-/* 
-.media-card img::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: red;
-} */
 
 @media screen and (min-width: 768px) {
   .media-card img {

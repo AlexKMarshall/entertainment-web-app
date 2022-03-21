@@ -1,20 +1,10 @@
 .avatar {
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  width: 1.5rem;
+  width: var(--space-m-l);
+  max-width: unset;
+  height: auto;
   object-fit: cover;
   outline: 1px solid var(--gray-400);
   outline-offset: -1px;
-}
-
-@media screen and (min-width: 768px) {
-  .avatar {
-    width: 2rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .avatar {
-    width: 2.5rem;
-  }
 }

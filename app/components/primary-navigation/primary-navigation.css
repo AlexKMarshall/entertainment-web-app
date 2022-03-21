@@ -1,5 +1,5 @@
 .primary-navigation ul {
-  --space: 1.5rem;
+  --space: var(--space-m-l);
   --default-direction: row;
   --default-justify: center;
   display: flex;
@@ -28,17 +28,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .primary-navigation ul {
-    --space: 2rem;
-  }
-
   .primary-navigation svg {
     width: 1.25rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .primary-navigation ul {
-    --space: 2.5rem;
   }
 }

@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  --header-padding: var(--space-m-m);
 }
 
 .browse main {
-  --container-padding-inline: 1rem;
-  padding-block-start: 1.5rem;
-  padding-block-end: 2.375rem;
+  --container-padding-inline: var(--space-s-m);
+  padding-block: var(--space-m-xl);
   flex-grow: 1;
   --media-reel-padding-inline: var(--container-padding-inline);
-  --media-reel-gap: 1rem;
+  --media-reel-gap: var(--space-s-l);
 }
 
 .browse header {
@@ -22,10 +22,9 @@
 }
 
 @media screen and (min-width: 768px) {
-  .browse main {
-    --container-padding-inline: 1.5rem;
-    padding-block-start: 2rem;
-    padding-block-end: 3.5rem;
+  .browse > header {
+    padding: var(--header-padding);
+    padding-block-end: unset;
   }
 }
 
@@ -35,14 +34,11 @@
   }
 
   .browse > header {
-    padding-block: 2rem;
-    padding-inline-start: 2rem;
+    padding: var(--header-padding);
+    padding-inline-end: unset;
   }
 
   .browse main {
-    --container-padding-inline: 3.125rem;
-    padding-block-start: 4rem;
-    padding-block-end: 2.35rem;
     overflow-y: auto;
   }
 }
