@@ -1,10 +1,12 @@
 .media-reel {
   --_media-reel-padding-inline: var(--media-reel-padding-inline, 1rem);
   --_media-reel-gap: var(--media-reel-gap, 1rem);
-  --_media-reel-scroll-padding: var(--media-reel-scroll-padding, 1rem);
+  --_media-reel-padding-block-end: var(--media-reel-padding-block-end, 1rem);
   display: flex;
   overflow-x: auto;
   gap: var(--_media-reel-gap);
+  scroll-snap-type: x proximity;
+  scroll-padding: var(--media-reel-padding-inline);
 }
 
 .media-reel::after,
@@ -19,5 +21,9 @@
 }
 
 .media-reel.overflowing {
-  padding-block-end: var(--_media-reel-scroll-padding);
+  padding-block-end: var(--_media-reel-padding-block-end);
+}
+
+.media-reel > li {
+  scroll-snap-align: start;
 }

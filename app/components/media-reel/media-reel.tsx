@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { LinksFunction } from 'remix'
 import { Media } from '~/media'
