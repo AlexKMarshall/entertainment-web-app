@@ -1,13 +1,17 @@
 import { ReactNode, useEffect, useRef } from 'react'
 
 import { LinksFunction } from 'remix'
+import { Media } from '~/media'
 import styles from './media-reel.css'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
-type Props = { children: ReactNode }
-export function MediaReel({ children }: Props): JSX.Element {
-  const reelRef = useRef<HTMLDivElement>(null)
+type Props = {
+  items: Media[]
+  renderItem: (item: Media) => JSX.Element
+}
+export function MediaReel({ items, renderItem }: Props): JSX.Element {
+  const reelRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
     const toggleOverflowClass = (el: Element) => {
@@ -30,8 +34,11 @@ export function MediaReel({ children }: Props): JSX.Element {
   }, [])
 
   return (
-    <div className="media-reel" ref={reelRef}>
-      {children}
-    </div>
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+    <ul className="media-reel" ref={reelRef} role="list">
+      {items.map((item) => (
+        <li key={item.id}>{renderItem(item)}</li>
+      ))}
+    </ul>
   )
 }

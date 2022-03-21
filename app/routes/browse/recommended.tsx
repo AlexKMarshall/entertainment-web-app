@@ -70,8 +70,9 @@ export default function Recommended(): JSX.Element {
           Trending
         </Heading>
         <div className="full-bleed">
-          <MediaReel>
-            {data.trending.map((mediaItem) => (
+          <MediaReel
+            items={data.trending}
+            renderItem={(mediaItem) => (
               <MediaCard
                 key={mediaItem.id}
                 title={mediaItem.title}
@@ -81,8 +82,8 @@ export default function Recommended(): JSX.Element {
                 imageSlug={mediaItem.imageSlug}
                 isTrending={true}
               />
-            ))}
-          </MediaReel>
+            )}
+          />
         </div>
       </div>
 
