@@ -90,8 +90,9 @@ export default function Recommended(): JSX.Element {
         <Heading level={2} size="l">
           Recommended for you
         </Heading>
-        <MediaGrid>
-          {data.recommended.map((mediaItem) => (
+        <MediaGrid
+          items={data.recommended}
+          renderItem={(mediaItem) => (
             <MediaCard
               key={mediaItem.id}
               title={mediaItem.title}
@@ -100,8 +101,8 @@ export default function Recommended(): JSX.Element {
               rating={mediaItem.rating}
               imageSlug={mediaItem.imageSlug}
             />
-          ))}
-        </MediaGrid>
+          )}
+        />
       </div>
     </>
   )
