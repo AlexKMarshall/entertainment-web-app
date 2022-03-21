@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 
 import { LinksFunction } from 'remix'
 import { Media } from '~/media'
@@ -12,6 +12,8 @@ type Props = {
 }
 export function MediaReel({ items, renderItem }: Props): JSX.Element {
   const reelRef = useRef<HTMLUListElement>(null)
+  const [intersectionObserver, setIntersectionObserver] =
+    useState<IntersectionObserver | null>(null)
 
   useEffect(() => {
     const toggleOverflowClass = (el: Element) => {
@@ -33,12 +35,61 @@ export function MediaReel({ items, renderItem }: Props): JSX.Element {
     }
   }, [])
 
+  useEffect(() => {
+    const options = {
+      root: reelRef.current,
+      threshold: 0.5,
+    }
+
+    const toggleInert: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0.5) {
+          entry.target.removeAttribute('inert')
+        } else {
+          entry.target.setAttribute('inert', 'inert')
+        }
+      })
+    }
+
+    setIntersectionObserver(new IntersectionObserver(toggleInert, options))
+  }, [])
+
   return (
     // eslint-disable-next-line jsx-a11y/no-redundant-roles
     <ul className="media-reel" ref={reelRef} role="list">
       {items.map((item) => (
-        <li key={item.id}>{renderItem(item)}</li>
+        <MediaReelItem
+          key={item.id}
+          intersectionObserver={intersectionObserver}
+        >
+          {renderItem(item)}
+        </MediaReelItem>
       ))}
     </ul>
   )
+}
+
+type MediaReelItemProps = {
+  children: ReactNode
+  intersectionObserver: IntersectionObserver | null
+}
+function MediaReelItem({
+  children,
+  intersectionObserver,
+}: MediaReelItemProps): JSX.Element {
+  const liRef = useRef<HTMLLIElement>(null)
+
+  useEffect(() => {
+    const liElement = liRef.current
+
+    if (liElement) {
+      intersectionObserver?.observe(liElement)
+
+      return () => {
+        intersectionObserver?.unobserve(liElement)
+      }
+    }
+  }, [intersectionObserver])
+
+  return <li ref={liRef}>{children}</li>
 }
