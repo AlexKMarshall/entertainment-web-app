@@ -6,7 +6,7 @@ import {
   links as primaryNavigationLinks,
 } from '~/components/primary-navigation'
 
-import styles from '~/styles/routes/browse.css'
+import styles from '~/styles/routes/media.css'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },

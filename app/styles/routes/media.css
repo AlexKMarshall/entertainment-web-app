@@ -10,7 +10,7 @@
   padding-block: var(--space-m-xl);
   flex-grow: 1;
   --media-reel-padding-inline: var(--container-padding-inline);
-  --media-reel-gap: var(--space-s-l);
+  --media-reel-gap: calc(var(--media-reel-padding-inline) * 0.75);
 }
 
 .browse header {
