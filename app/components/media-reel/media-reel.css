@@ -26,4 +26,9 @@
 
 .media-reel > li {
   scroll-snap-align: start;
+  transition: opacity 0.5s linear;
+}
+
+.media-reel > li[inert] {
+  opacity: 0.3;
 }
