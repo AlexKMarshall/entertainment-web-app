@@ -34,15 +34,17 @@ export function MediaCard({
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
-      <MediaMeta
-        year={year}
-        category={category}
-        rating={rating}
-        size={isTrending ? 'm' : 's'}
-      />
-      <Heading level={3} size={isTrending ? 'm' : 's'}>
-        {title}
-      </Heading>
+      <div className="info">
+        <MediaMeta
+          year={year}
+          category={category}
+          rating={rating}
+          size={isTrending ? 'm' : 's'}
+        />
+        <Heading level={3} size={isTrending ? 'm' : 's'}>
+          {title}
+        </Heading>
+      </div>
     </article>
   )
 }
