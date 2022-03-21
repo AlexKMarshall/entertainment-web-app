@@ -5,11 +5,11 @@
 }
 
 .browse main {
-  --center-container-gutter: 1rem;
+  --container-padding-inline: 1rem;
   padding-block-start: 1.5rem;
   padding-block-end: 2.375rem;
   flex-grow: 1;
-  --media-reel-padding-inline: var(--center-container-gutter);
+  --media-reel-padding-inline: var(--container-padding-inline);
   --media-reel-gap: 1rem;
   row-gap: 2rem;
 }
@@ -24,7 +24,7 @@
 
 @media screen and (min-width: 768px) {
   .browse main {
-    --center-container-gutter: 1.5rem;
+    --container-padding-inline: 1.5rem;
     padding-block-start: 2rem;
     padding-block-end: 3.5rem;
   }
@@ -41,7 +41,7 @@
   }
 
   .browse main {
-    --center-container-gutter: 3.125rem;
+    --container-padding-inline: 3.125rem;
     padding-block-start: 4rem;
     padding-block-end: 2.35rem;
     overflow-y: auto;

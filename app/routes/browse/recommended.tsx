@@ -65,7 +65,7 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <>
-      <div className="full-bleed center-container">
+      <div className="">
         <Heading level={2} size="l">
           Trending
         </Heading>

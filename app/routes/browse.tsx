@@ -24,7 +24,7 @@ export default function Catalog() {
           avatar={<Avatar src="/assets/image-avatar.png" />}
         />
       </header>
-      <main className="center-container">
+      <main className="container">
         <Outlet />
       </main>
     </div>
