@@ -26,7 +26,15 @@
 }
 
 .media-card dd {
-  display: inline;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1ch;
+}
+
+.media-card svg {
+  display: inline-block;
+  width: 0.9em;
+  opacity: 0.75;
 }
 
 .media-card dd:not(:last-child)::after {
