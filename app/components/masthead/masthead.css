@@ -1,5 +1,5 @@
 .masthead {
-  padding: 1rem;
+  padding: var(--space-s-l);
   background-color: var(--gray-200);
   display: flex;
   align-items: center;
@@ -10,16 +10,12 @@
 }
 
 .masthead .logo {
-  width: 1.5rem;
+  width: var(--space-m-m);
 }
 
 @media screen and (min-width: 768px) {
   .masthead {
-    padding: 1.5rem;
-  }
-
-  .masthead .logo {
-    width: 2rem;
+    border-radius: 20px;
   }
 }
 
@@ -29,7 +25,5 @@
     --nav-direction: column;
     --nav-justify: flex-start;
     gap: 4.5rem;
-    border-radius: 20px;
-    padding: 1.75rem;
   }
 }

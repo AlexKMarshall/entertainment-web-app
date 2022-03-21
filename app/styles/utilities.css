@@ -8,10 +8,14 @@
 }
 
 .stack {
-  --_stack-gap: var(--stack-gap, 1.5rem);
+  --_stack-gap: var(--stack-gap, var(--space-m-m));
   display: flex;
   flex-direction: column;
   gap: var(--_stack-gap);
+}
+
+.stack-large {
+  --stack-gap: var(--space-m-l);
 }
 
 .font-weight-light {

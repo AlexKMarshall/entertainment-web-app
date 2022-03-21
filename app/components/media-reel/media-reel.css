@@ -1,7 +1,10 @@
 .media-reel {
   --_media-reel-padding-inline: var(--media-reel-padding-inline, 1rem);
   --_media-reel-gap: var(--media-reel-gap, 1rem);
-  --_media-reel-padding-block-end: var(--media-reel-padding-block-end, 1rem);
+  --_media-reel-padding-block-end: var(
+    --media-reel-padding-block-end,
+    var(--_media-reel-padding-inline)
+  );
   display: flex;
   overflow-x: auto;
   gap: var(--_media-reel-gap);

@@ -19,6 +19,14 @@
   --gray-400: hsl(var(--gray-400-hsl));
   --gray-400-75pc: hsl(var(--gray-400-hsl) / 0.75);
   --red-300: hsl(0deg 97% 63%);
+
+  /* space */
+  --space-s-s: clamp(1rem, 0.8vw + 0.75rem, 1.5rem);
+  --space-s-m: clamp(1rem, 1.6vw + 0.5rem, 2rem);
+  --space-s-l: clamp(1rem, 2.4vw + 0.25rem, 2.5rem);
+  --space-m-m: clamp(1.5rem, 0.8vw + 1.25rem, 2rem);
+  --space-m-l: clamp(1.5rem, 1.6vw + 1rem, 2.5rem);
+  --space-m-xl: clamp(1.5rem, 4vw + 0.25rem, 4rem);
 }
 
 @media screen and (min-width: 768px) {
