@@ -1,6 +1,7 @@
 .media-reel {
   --_media-reel-padding-inline: var(--media-reel-padding-inline, 1rem);
   --_media-reel-gap: var(--media-reel-gap, 1rem);
+  --_media-reel-scroll-padding: var(--media-reel-scroll-padding, 1rem);
   display: flex;
   overflow-x: auto;
   gap: var(--_media-reel-gap);
@@ -15,4 +16,8 @@
 
 .media-reel > * {
   flex-shrink: 0;
+}
+
+.media-reel.overflowing {
+  padding-block-end: var(--_media-reel-scroll-padding);
 }
