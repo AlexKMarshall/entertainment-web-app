@@ -1,0 +1,29 @@
+.search-input {
+  display: flex;
+  gap: 1rem;
+}
+
+.search-input svg {
+  width: 1.5rem;
+}
+
+.search-input input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  flex-grow: 1;
+  flex-basis: 100%;
+  min-width: 0;
+  caret-color: var(--red-300);
+  padding-block: 0.5rem;
+  border-bottom: 1px solid transparent;
+}
+
+.search-input input:focus-visible {
+  outline: none;
+  border-color: var(--gray-300);
+}
+
+.search-input input::placeholder {
+  color: var(--gray-400-75pc);
+}
