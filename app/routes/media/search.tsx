@@ -64,7 +64,7 @@ export default function CatalogType(): JSX.Element {
     <>
       <Form method="get" action="/media/search">
         <SearchInput
-          inputProps={{ id: 'search', name: 'query' }}
+          inputProps={{ id: 'search', name: 'query', defaultValue: data.query }}
           label="Search for movies or TV Series"
         />
       </Form>
