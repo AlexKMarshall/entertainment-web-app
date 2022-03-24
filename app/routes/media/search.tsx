@@ -1,8 +1,12 @@
+import { Form, LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { Media, selectMedia } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
+import {
+  SearchInput,
+  links as searchInputLinks,
+} from '~/components/search-input'
 
 import { db } from '~/utils/db.server'
 import { inflect } from '~/utils'
@@ -19,6 +23,7 @@ export const links: LinksFunction = () => [
   ...headingLinks(),
   ...mediaGridLinks(),
   ...mediaCardLinks(),
+  ...searchInputLinks(),
 ]
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -56,23 +61,31 @@ export default function CatalogType(): JSX.Element {
   const getHeadingText = (count: number, query: string) =>
     `Found ${count} ${inflect('result')(count)} for '${query}'`
   return (
-    <div className="stack">
-      <Heading level={2} size="m">
-        {getHeadingText(data.results.count, data.query)}
-      </Heading>
-      <MediaGrid
-        items={data.results.media}
-        renderItem={(mediaItem) => (
-          <MediaCard
-            key={mediaItem.id}
-            title={mediaItem.title}
-            year={mediaItem.year}
-            category={mediaItem.category}
-            rating={mediaItem.rating}
-            imageSlug={mediaItem.imageSlug}
-          />
-        )}
-      />
-    </div>
+    <>
+      <Form method="get" action="/media/search">
+        <SearchInput
+          inputProps={{ id: 'search', name: 'query' }}
+          label="Search for movies or TV Series"
+        />
+      </Form>
+      <div className="stack">
+        <Heading level={2} size="m">
+          {getHeadingText(data.results.count, data.query)}
+        </Heading>
+        <MediaGrid
+          items={data.results.media}
+          renderItem={(mediaItem) => (
+            <MediaCard
+              key={mediaItem.id}
+              title={mediaItem.title}
+              year={mediaItem.year}
+              category={mediaItem.category}
+              rating={mediaItem.rating}
+              imageSlug={mediaItem.imageSlug}
+            />
+          )}
+        />
+      </div>
+    </>
   )
 }
