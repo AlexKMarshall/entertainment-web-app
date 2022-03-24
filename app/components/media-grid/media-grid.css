@@ -2,7 +2,7 @@
   --media-grid-min-width: 125px;
   display: grid;
   grid-template-columns: repeat(
-    auto-fit,
+    auto-fill,
     minmax(var(--media-grid-min-width), 1fr)
   );
   row-gap: var(--space-s-m);
