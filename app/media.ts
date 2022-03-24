@@ -6,3 +6,14 @@ export type Media = {
   id: string
   imageSlug: string
 }
+
+export const selectMedia = {
+  id: true,
+  title: true,
+  year: true,
+  rating: true,
+  category: {
+    select: { display: true },
+  },
+  image: true,
+}
