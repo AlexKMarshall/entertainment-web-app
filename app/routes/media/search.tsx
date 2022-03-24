@@ -24,9 +24,11 @@ export const links: LinksFunction = () => [
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url)
   const query = url.searchParams.get('query') ?? ''
+  const categoryName = url.searchParams.get('category') ?? ''
 
   const media = await db.media.findMany({
     where: {
+      ...(categoryName ? { category: { name: categoryName } } : {}),
       title: {
         search: query,
       },
