@@ -13,6 +13,7 @@ import { inflect } from '~/utils'
 
 type LoaderData = {
   query: string
+  categoryName: string
   results: {
     count: number
     media: Media[]
@@ -43,6 +44,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const data: LoaderData = {
     query,
+    categoryName,
     results: {
       count: media.length,
       media: media.map((item) => ({
@@ -67,6 +69,7 @@ export default function CatalogType(): JSX.Element {
           inputProps={{ id: 'search', name: 'query', defaultValue: data.query }}
           label="Search for movies or TV Series"
         />
+        <input type="hidden" name="category" value={data.categoryName} />
       </Form>
       <div className="stack">
         <Heading level={2} size="m">
