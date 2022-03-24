@@ -6,7 +6,7 @@ export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
 type Props = {
   label: string
-  inputProps: { id: string }
+  inputProps: { id: string; name: string }
 }
 export function SearchInput({ inputProps, label }: Props): JSX.Element {
   return (
@@ -18,6 +18,7 @@ export function SearchInput({ inputProps, label }: Props): JSX.Element {
       <input
         type="search"
         placeholder={label}
+        name={inputProps.name}
         id={inputProps.id}
         autoComplete="off"
         autoCorrect="off"
