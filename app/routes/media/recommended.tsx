@@ -1,8 +1,12 @@
+import { Form, LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import { MediaReel, links as mediaReelLinks } from '~/components/media-reel'
+import {
+  SearchInput,
+  links as searchInputLinks,
+} from '~/components/search-input'
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
@@ -17,6 +21,7 @@ export const links: LinksFunction = () => [
   ...mediaCardLinks(),
   ...mediaGridLinks(),
   ...mediaReelLinks(),
+  ...searchInputLinks(),
 ]
 
 export const loader: LoaderFunction = async () => {
@@ -65,6 +70,12 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <>
+      <Form method="get" action="/media/search">
+        <SearchInput
+          inputProps={{ id: 'search', name: 'query' }}
+          label="Search for movies or TV Series"
+        />
+      </Form>
       <div className="stack">
         <Heading level={2} size="l">
           Trending
