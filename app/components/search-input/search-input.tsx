@@ -21,6 +21,7 @@ export function SearchInput({ inputProps, label }: Props): JSX.Element {
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="off"
+        className="font-size-400"
         {...inputProps}
       />
     </div>
