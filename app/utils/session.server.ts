@@ -8,6 +8,18 @@ type LoginForm = {
   password: string
 }
 
+export async function register({ email, password }: LoginForm) {
+  const passwordHash = await bcrypt.hash(password, 10)
+  try {
+    const user = await db.user.create({
+      data: { email, passwordHash },
+    })
+    return { id: user.id, email }
+  } catch {
+    return null
+  }
+}
+
 export async function login({ email, password }: LoginForm) {
   const user = await db.user.findUnique({
     where: {
