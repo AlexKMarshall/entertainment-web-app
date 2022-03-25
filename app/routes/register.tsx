@@ -1,4 +1,4 @@
-import { Form, Link, LinksFunction } from 'remix'
+import { Form, Link, LinksFunction, useSearchParams } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
 
 import { LogoIcon } from '~/components/icons'
@@ -10,6 +10,11 @@ export const links: LinksFunction = () => [
 ]
 
 export default function RegisterPage(): JSX.Element {
+  const [searchParams] = useSearchParams()
+  const loginHref =
+    searchParams.values.length > 0
+      ? `/login?${searchParams.toString}`
+      : '/login'
   return (
     <main>
       <LogoIcon className="logo" />
@@ -17,6 +22,11 @@ export default function RegisterPage(): JSX.Element {
         <Heading level={1} size="l">
           Sign Up
         </Heading>
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={searchParams.get('redirectTo') ?? undefined}
+        />
         <div className="stack">
           <label>
             <span className="visually-hidden">Email Address</span>
@@ -38,7 +48,7 @@ export default function RegisterPage(): JSX.Element {
         <div className="stack">
           <button type="submit">Create an account</button>
           <p>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to={loginHref}>Login</Link>
           </p>
         </div>
       </Form>

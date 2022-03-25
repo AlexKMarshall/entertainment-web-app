@@ -79,6 +79,11 @@ export const action: ActionFunction = async ({ request }) => {
 export default function LoginPage(): JSX.Element {
   const actionData = useActionData<ActionData>()
   const [searchParams] = useSearchParams()
+  const registerHref =
+    searchParams.values.length > 0
+      ? `/register?${searchParams.toString}`
+      : '/register'
+
   return (
     <main>
       <LogoIcon className="logo" />
@@ -140,7 +145,7 @@ export default function LoginPage(): JSX.Element {
         <div className="stack">
           <button type="submit">Login to your account</button>
           <p className="align-self-center">
-            Don't have an account? <Link to="/register">Sign Up</Link>
+            Don't have an account? <Link to={registerHref}>Sign Up</Link>
           </p>
         </div>
       </Form>
