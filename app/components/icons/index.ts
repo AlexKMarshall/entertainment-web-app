@@ -1,3 +1,4 @@
+export * from './bookmark-outline'
 export * from './home'
 export * from './logo'
 export * from './movie'
