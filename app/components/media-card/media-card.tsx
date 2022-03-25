@@ -1,8 +1,8 @@
-import { MovieIcon, TVSeriesIcon } from '../icons'
+import { BookmarkOutlineIcon, MovieIcon, TVSeriesIcon } from '../icons'
+import { Form, LinksFunction } from 'remix'
 
 import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
-import { LinksFunction } from 'remix'
 import styles from './media-card.css'
 
 type Props = {
@@ -35,6 +35,11 @@ export function MediaCard({
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
+      <Form>
+        <button type="submit">
+          <BookmarkOutlineIcon />
+        </button>
+      </Form>
       <div className="info">
         <MediaMeta
           year={year}

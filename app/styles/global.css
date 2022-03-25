@@ -11,6 +11,7 @@
   /* color */
   --gray-100-hsl: 223deg 30% 9%;
   --gray-100: hsl(var(--gray-100-hsl));
+  --gray-100-50pc: hsl(var(--gray-100-hsl) / 0.5);
   --gray-200-hsl: 223deg 36% 14%;
   --gray-200: hsl(var(--gray-200-hsl));
   --gray-300-hsl: 223deg 23% 46%;
