@@ -9,6 +9,7 @@ import {
 import { Heading, links as headingLinks } from '~/components/heading'
 
 import { LogoIcon } from '~/components/icons'
+import { login } from '~/utils/session.server'
 import styles from '~/styles/routes/login.css'
 import { z } from 'zod'
 
@@ -50,6 +51,16 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (!parsedForm.success) {
     return badRequest({ ...parsedForm.error.flatten(), fields })
+  }
+  const { email, password } = parsedForm.data
+
+  const user = await login({ email, password })
+
+  if (!user) {
+    return badRequest({
+      fields,
+      formErrors: ['Email/Password combination is incorrect'],
+    })
   }
 
   return badRequest({ fields, formErrors: ['Not implemented'] })
