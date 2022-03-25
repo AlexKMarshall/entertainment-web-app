@@ -37,6 +37,10 @@ input:focus-visible {
   border-color: var(--gray-400);
 }
 
+input::placeholder {
+  color: var(--gray-400-75pc);
+}
+
 button {
   background: var(--red-300);
   border: none;
