@@ -5,11 +5,12 @@ import {
   LinksFunction,
   json,
   useActionData,
+  useSearchParams,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
+import { createUserSession, login } from '~/utils/session.server'
 
 import { LogoIcon } from '~/components/icons'
-import { login } from '~/utils/session.server'
 import styles from '~/styles/routes/login.css'
 import { z } from 'zod'
 
@@ -21,6 +22,7 @@ export const links: LinksFunction = () => [
 const loginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(5),
+  redirectTo: z.string(),
 })
 
 type FormDataErrors = z.inferFlattenedErrors<typeof loginFormSchema>
@@ -41,18 +43,26 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const form = Object.fromEntries(formData.entries())
 
-  if (typeof form.email !== 'string' || typeof form.password !== 'string') {
+  if (
+    typeof form.email !== 'string' ||
+    typeof form.password !== 'string' ||
+    typeof form.redirectTo !== 'string'
+  ) {
     return badRequest({ formErrors: ['Form not submitted correctly'] })
   }
 
-  const fields = { email: form.email, password: form.password }
+  const fields = {
+    email: form.email,
+    password: form.password,
+    redirectTo: form.redirectTo,
+  }
 
   const parsedForm = loginFormSchema.safeParse(form)
 
   if (!parsedForm.success) {
     return badRequest({ ...parsedForm.error.flatten(), fields })
   }
-  const { email, password } = parsedForm.data
+  const { email, password, redirectTo } = parsedForm.data
 
   const user = await login({ email, password })
 
@@ -63,11 +73,12 @@ export const action: ActionFunction = async ({ request }) => {
     })
   }
 
-  return badRequest({ fields, formErrors: ['Not implemented'] })
+  return createUserSession(user.id, redirectTo)
 }
 
 export default function LoginPage(): JSX.Element {
   const actionData = useActionData<ActionData>()
+  const [searchParams] = useSearchParams()
   return (
     <main>
       <LogoIcon className="logo" />
@@ -75,6 +86,11 @@ export default function LoginPage(): JSX.Element {
         <Heading level={1} size="l">
           Login
         </Heading>
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={searchParams.get('redirectTo') ?? undefined}
+        />
         <div className="stack">
           <label>
             <span className="visually-hidden">Email Address</span>
