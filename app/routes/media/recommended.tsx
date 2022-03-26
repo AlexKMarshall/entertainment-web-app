@@ -15,9 +15,9 @@ import {
   SearchInput,
   links as searchInputLinks,
 } from '~/components/search-input'
+import { getUserId, requireUserId } from '~/utils/session.server'
 
 import { db } from '~/utils/db.server'
-import { requireUserId } from '~/utils/session.server'
 
 type LoaderData = {
   trending: Media[]
@@ -47,26 +47,43 @@ export const action: ActionFunction = async ({ request }) => {
   return null
 }
 
-export const loader: LoaderFunction = async () => {
-  const selectMedia = {
-    id: true,
-    title: true,
-    year: true,
-    rating: true,
-    category: {
-      select: { display: true },
-    },
-    image: true,
-  }
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request)
 
   const recommendedQuery = db.media.findMany({
     take: 20,
-    select: selectMedia,
+    select: {
+      id: true,
+      title: true,
+      year: true,
+      rating: true,
+      category: {
+        select: { display: true },
+      },
+      image: true,
+      users: {
+        where: { id: userId ?? '' },
+        select: { id: true },
+      },
+    },
   })
   const trendingQuery = db.media.findMany({
     take: 20,
     where: { isTrending: true },
-    select: selectMedia,
+    select: {
+      id: true,
+      title: true,
+      year: true,
+      rating: true,
+      category: {
+        select: { display: true },
+      },
+      image: true,
+      users: {
+        where: { id: userId ?? '' },
+        select: { id: true },
+      },
+    },
   })
 
   const [recommended, trending] = await Promise.all([
@@ -79,11 +96,13 @@ export const loader: LoaderFunction = async () => {
       ...item,
       category: item.category.display,
       imageSlug: item.image,
+      isBookmarked: item.users.length > 0,
     })),
     recommended: recommended.map((item) => ({
       ...item,
       category: item.category.display,
       imageSlug: item.image,
+      isBookmarked: item.users.length > 0,
     })),
   }
   return json(data)
@@ -115,6 +134,7 @@ export default function Recommended(): JSX.Element {
                 category={mediaItem.category}
                 rating={mediaItem.rating}
                 imageSlug={mediaItem.imageSlug}
+                isBookmarked={mediaItem.isBookmarked}
                 isTrending={true}
               />
             )}
@@ -137,6 +157,7 @@ export default function Recommended(): JSX.Element {
               category={mediaItem.category}
               rating={mediaItem.rating}
               imageSlug={mediaItem.imageSlug}
+              isBookmarked={mediaItem.isBookmarked}
             />
           )}
         />
