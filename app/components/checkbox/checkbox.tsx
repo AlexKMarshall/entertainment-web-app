@@ -25,7 +25,7 @@ export function Checkbox({
         type="checkbox"
         name={name}
         className="visually-hidden"
-        defaultChecked={false}
+        defaultChecked={defaultChecked}
       />
       <span className="layer">
         <span className="checked">{checkedDisplay}</span>

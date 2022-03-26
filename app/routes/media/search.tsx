@@ -7,7 +7,7 @@ import {
   useLoaderData,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { Media, getCategoryTitle, selectMedia, updateBookmark } from '~/media'
+import { Media, getCategoryTitle, updateBookmark } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import {
@@ -72,7 +72,24 @@ export const loader: LoaderFunction = async ({ request }) => {
         search: query,
       },
     },
-    select: selectMedia,
+    select: {
+      id: true,
+      title: true,
+      year: true,
+      rating: true,
+      category: {
+        select: { display: true },
+      },
+      image: true,
+      users: {
+        where: {
+          id: userId ?? '',
+        },
+        select: {
+          id: true,
+        },
+      },
+    },
   })
 
   const data: LoaderData = {
@@ -85,6 +102,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         ...item,
         category: item.category.display,
         imageSlug: item.image,
+        isBookmarked: item.users.length > 0,
       })),
     },
   }
@@ -132,6 +150,7 @@ export default function CatalogType(): JSX.Element {
               category={mediaItem.category}
               rating={mediaItem.rating}
               imageSlug={mediaItem.imageSlug}
+              isBookmarked={mediaItem.isBookmarked}
             />
           )}
         />
