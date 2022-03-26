@@ -12,11 +12,12 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  email        String   @unique
-  passwordHash String
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  email           String   @unique
+  passwordHash    String
+  bookmarkedMedia Media[]
 }
 
 model Category {
@@ -37,4 +38,5 @@ model Media {
   rating     String
   isTrending Boolean
   image      String
+  users      User[]
 }
