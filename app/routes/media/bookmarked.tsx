@@ -94,6 +94,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
+
+  const categoryData = data.filter((category) => category.media.length > 0)
   return (
     <>
       <Form method="get" action="/media/search">
@@ -103,33 +105,36 @@ export default function CatalogType(): JSX.Element {
         />
         <input type="hidden" name="bookmarked" value="true" />
       </Form>
-      {data
-        .filter((category) => category.media.length > 0)
-        .map((category) => (
-          <React.Fragment key={category.categoryName}>
-            <div className="stack">
-              <Heading level={2} size="l">
-                {getCategoryTitle(category.categoryName)}
-              </Heading>
+      {categoryData.map((category) => (
+        <React.Fragment key={category.categoryName}>
+          <div className="stack">
+            <Heading level={2} size="l">
+              {getCategoryTitle(category.categoryName)}
+            </Heading>
 
-              <MediaGrid
-                items={category.media}
-                renderItem={(mediaItem) => (
-                  <MediaCard
-                    key={mediaItem.id}
-                    id={mediaItem.id}
-                    title={mediaItem.title}
-                    year={mediaItem.year}
-                    category={mediaItem.category}
-                    rating={mediaItem.rating}
-                    imageSlug={mediaItem.imageSlug}
-                    isBookmarked={mediaItem.isBookmarked}
-                  />
-                )}
-              />
-            </div>
-          </React.Fragment>
-        ))}
+            <MediaGrid
+              items={category.media}
+              renderItem={(mediaItem) => (
+                <MediaCard
+                  key={mediaItem.id}
+                  id={mediaItem.id}
+                  title={mediaItem.title}
+                  year={mediaItem.year}
+                  category={mediaItem.category}
+                  rating={mediaItem.rating}
+                  imageSlug={mediaItem.imageSlug}
+                  isBookmarked={mediaItem.isBookmarked}
+                />
+              )}
+            />
+          </div>
+        </React.Fragment>
+      ))}
+      {categoryData.length === 0 ? (
+        <Heading level={2} size="s">
+          You have no bookmarked items
+        </Heading>
+      ) : null}
     </>
   )
 }
