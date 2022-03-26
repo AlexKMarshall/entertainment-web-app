@@ -1,0 +1,23 @@
+.media-image {
+  --_media-image-brightness: var(--media-image-brightness, 1);
+  object-fit: cover;
+  height: auto;
+  width: 100%;
+  transition: filter 200ms linear;
+  filter: brightness(var(--_media-image-brightness));
+}
+
+@media screen and (min-width: 768px) {
+  .media-image {
+    aspect-ratio: 440 / 280;
+  }
+  .media-image[data-trending] {
+    aspect-ratio: 940 / 460;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .media-image {
+    aspect-ratio: 560 / 348;
+  }
+}

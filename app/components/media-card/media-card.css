@@ -56,16 +56,9 @@
   isolation: isolate;
 }
 
-.media-card img {
-  object-fit: cover;
-  height: auto;
-  width: 100%;
-  transition: filter 200ms linear;
-}
-
-.media-card:hover img,
-.media-card:focus-within img {
-  filter: brightness(0.5);
+.media-card:hover,
+.media-card:focus-within {
+  --media-image-brightness: 0.5;
 }
 
 .media-card[data-trending] .image-wrapper::after {
@@ -78,22 +71,6 @@
     hsl(var(--gray-100-hsl) / 75%)
   );
   z-index: 2;
-}
-
-@media screen and (min-width: 768px) {
-  .media-card img {
-    aspect-ratio: 440 / 280;
-  }
-
-  .media-card[data-trending] img {
-    aspect-ratio: 940 / 460;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .media-card img {
-    aspect-ratio: 560 / 348;
-  }
 }
 
 .media-card form {
