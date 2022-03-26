@@ -5,6 +5,7 @@ import {
   TVSeriesIcon,
 } from '../icons'
 import { Form, Link, LinksFunction, useSubmit } from 'remix'
+import { MouseEventHandler, useRef } from 'react'
 
 import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
@@ -40,15 +41,23 @@ export function MediaCard({
   isBookmarked = false,
 }: Props): JSX.Element {
   const submit = useSubmit()
+  const linkRef = useRef<HTMLAnchorElement>(null)
+  const handleCardClick = () => {
+    linkRef.current?.click()
+  }
+  const playButtonId = `${id}-play`
 
   return (
     <article
       className="media-card"
+      onClick={handleCardClick}
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <div className="info">
         <Heading level={3} size={isTrending ? 'm' : 's'}>
-          <Link to=".">{title}</Link>
+          <Link to="." ref={linkRef} aria-describedby={playButtonId}>
+            {title}
+          </Link>
         </Heading>
         <MediaMeta
           year={year}
@@ -78,7 +87,7 @@ export function MediaCard({
       </Form>
       <div className="image-wrapper">
         <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
-        <div className="play-button">
+        <div className="play-button" id={playButtonId}>
           <PlayIcon />
           Play
         </div>
