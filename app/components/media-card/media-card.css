@@ -75,6 +75,7 @@
   font-size: var(--font-size-300);
   opacity: var(--play-button-opacity);
   transition: opacity 200ms linear;
+  z-index: 3;
 }
 
 .media-card .play-button svg {
@@ -118,6 +119,7 @@
     hsl(var(--gray-100-hsl) / 0%),
     hsl(var(--gray-100-hsl) / 75%)
   );
+  z-index: 2;
 }
 
 @media screen and (min-width: 768px) {
