@@ -21,6 +21,7 @@
 
 .layer > * {
   grid-area: layer;
+  position: relative;
 }
 
 .stack-large {
