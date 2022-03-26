@@ -7,7 +7,7 @@ import {
   useLoaderData,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { Media, updateBookmark } from '~/media'
+import { Media, getCategoryTitle, updateBookmark } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import {
@@ -106,8 +106,8 @@ export default function CatalogType(): JSX.Element {
       {data.map((category) => (
         <React.Fragment key={category.categoryName}>
           <div className="stack">
-            <Heading level={2} size="m">
-              {category.categoryDisplay}
+            <Heading level={2} size="l">
+              {getCategoryTitle(category.categoryDisplay)}
             </Heading>
 
             <MediaGrid

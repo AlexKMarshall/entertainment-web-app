@@ -21,9 +21,9 @@ const componentMap: Record<Props['level'], ElementType> = {
 }
 
 const sizeClassesMap: Record<Props['size'], ClassValue> = {
-  l: ['font-size-500', 'font-weight-light'],
-  m: ['font-size-400', 'font-weight-medium'],
-  s: ['font-size-300', 'font-weight-medium'],
+  l: ['font-size-500', 'font-weight-light', 'capitalize'],
+  m: ['font-size-400', 'font-weight-medium', 'capitalize'],
+  s: ['font-size-300', 'font-weight-medium', 'capitalize'],
 }
 
 export function Heading({ level, size, children }: Props): JSX.Element {

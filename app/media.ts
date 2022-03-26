@@ -37,3 +37,14 @@ export function updateBookmark(
     },
   })
 }
+
+export const getCategoryTitle = (category: string): string => {
+  switch (category) {
+    case 'movie':
+      return 'movies'
+    case 'tv-series':
+      return 'TV series'
+    default:
+      return category
+  }
+}

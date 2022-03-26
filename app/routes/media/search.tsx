@@ -95,7 +95,7 @@ export default function CatalogType(): JSX.Element {
         <input type="hidden" name="category" value={data.categoryName} />
       </Form>
       <div className="stack">
-        <Heading level={2} size="m">
+        <Heading level={2} size="l">
           {getHeadingText(data.results.count, data.query)}
         </Heading>
         <MediaGrid

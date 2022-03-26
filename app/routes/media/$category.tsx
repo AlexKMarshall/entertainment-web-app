@@ -7,7 +7,7 @@ import {
   useLoaderData,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { Media, updateBookmark } from '~/media'
+import { Media, getCategoryTitle, updateBookmark } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import {
@@ -100,20 +100,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json(data)
 }
 
-const getSearchLabelCategory = (category: string): string => {
-  switch (category) {
-    case 'movie':
-      return 'movies'
-    case 'tv-series':
-      return 'TV series'
-    default:
-      return category
-  }
-}
-
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
-  const searchLabel = `Search for ${getSearchLabelCategory(data.categoryName)}`
+  const searchLabel = `Search for ${getCategoryTitle(data.categoryName)}`
   return (
     <>
       <Form method="get" action="/media/search">
@@ -124,8 +113,8 @@ export default function CatalogType(): JSX.Element {
         <input type="hidden" name="category" value={data.categoryName} />
       </Form>
       <div className="stack">
-        <Heading level={2} size="m">
-          {data.categoryDisplay}
+        <Heading level={2} size="l">
+          {getCategoryTitle(data.categoryName)}
         </Heading>
 
         <MediaGrid
