@@ -1,3 +1,5 @@
+import { db } from '~/utils/db.server'
+
 export type Media = {
   title: string
   year: number
@@ -17,4 +19,21 @@ export const selectMedia = {
     select: { display: true },
   },
   image: true,
+}
+
+export function updateBookmark(
+  mediaId: string,
+  userId: string,
+  isBookmarked: boolean
+) {
+  return db.media.update({
+    where: {
+      id: mediaId,
+    },
+    data: {
+      users: isBookmarked
+        ? { connect: { id: userId } }
+        : { disconnect: { id: userId } },
+    },
+  })
 }

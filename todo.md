@@ -6,6 +6,5 @@ refactor nested CSS
 extract image logic
 write readme
 remaining responsive sizing
-refactor route actions
 refactor route loaders
 style scrollbars
