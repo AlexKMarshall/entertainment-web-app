@@ -66,15 +66,15 @@ export function MediaCard({
         </label>
       </Form>
       <div className="info">
+        <Heading level={3} size={isTrending ? 'm' : 's'}>
+          {title}
+        </Heading>
         <MediaMeta
           year={year}
           category={category}
           rating={rating}
           size={isTrending ? 'm' : 's'}
         />
-        <Heading level={3} size={isTrending ? 'm' : 's'}>
-          {title}
-        </Heading>
       </div>
     </article>
   )
