@@ -7,21 +7,22 @@ import {
   useLoaderData,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { Media, selectMedia, updateBookmark } from '~/media'
+import { Media, getCategoryTitle, selectMedia, updateBookmark } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import {
   SearchInput,
   links as searchInputLinks,
 } from '~/components/search-input'
+import { getUserId, requireUserId } from '~/utils/session.server'
 
 import { db } from '~/utils/db.server'
 import { inflect } from '~/utils'
-import { requireUserId } from '~/utils/session.server'
 
 type LoaderData = {
   query: string
   categoryName: string
+  bookmarked: string
   results: {
     count: number
     media: Media[]
@@ -51,12 +52,21 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request)
   const url = new URL(request.url)
   const query = url.searchParams.get('query') ?? ''
   const categoryName = url.searchParams.get('category') ?? ''
+  const bookmarked = url.searchParams.get('bookmarked') ?? ''
 
   const media = await db.media.findMany({
     where: {
+      ...(bookmarked === 'true' && userId
+        ? {
+            users: {
+              some: { id: userId },
+            },
+          }
+        : {}),
       ...(categoryName ? { category: { name: categoryName } } : {}),
       title: {
         search: query,
@@ -68,6 +78,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const data: LoaderData = {
     query,
     categoryName,
+    bookmarked,
     results: {
       count: media.length,
       media: media.map((item) => ({
@@ -80,19 +91,31 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json(data)
 }
 
+const getSearchLabel = (bookmarked: string, category: string): string => {
+  if (bookmarked == 'true') {
+    return 'Search for bookmarked shows'
+  }
+  if (category) {
+    return `Search for ${getCategoryTitle(category)}`
+  }
+  return `Search for movies or TV Series`
+}
+const getHeadingText = (count: number, query: string) =>
+  `Found ${count} ${inflect('result')(count)} for '${query}'`
+
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
+  const searchLabel = getSearchLabel(data.bookmarked, data.categoryName)
 
-  const getHeadingText = (count: number, query: string) =>
-    `Found ${count} ${inflect('result')(count)} for '${query}'`
   return (
     <>
       <Form method="get" action="/media/search">
         <SearchInput
           inputProps={{ id: 'search', name: 'query', defaultValue: data.query }}
-          label="Search for movies or TV Series"
+          label={searchLabel}
         />
         <input type="hidden" name="category" value={data.categoryName} />
+        <input type="hidden" name="bookmarked" value={data.bookmarked} />
       </Form>
       <div className="stack">
         <Heading level={2} size="l">
