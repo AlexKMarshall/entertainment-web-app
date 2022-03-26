@@ -7,7 +7,7 @@ import {
   useLoaderData,
 } from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
-import { Media, selectMedia } from '~/media'
+import { Media, selectMedia, updateBookmark } from '~/media'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
 import {
@@ -41,25 +41,12 @@ export const action: ActionFunction = async ({ request }) => {
   const isBookmarked = formData.get('isBookmarked')
   const mediaId = formData.get('mediaId')
 
-  if (isBookmarked && typeof mediaId === 'string') {
-    await db.media.update({
-      where: { id: mediaId },
-      data: {
-        users: { connect: { id: userId } },
-      },
-    })
+  if (typeof mediaId !== 'string') {
+    return json({ message: 'Bad form data' }, { status: 400 })
   }
 
-  if (!isBookmarked && typeof mediaId === 'string') {
-    await db.media.update({
-      where: { id: mediaId },
-      data: {
-        users: {
-          disconnect: { id: userId },
-        },
-      },
-    })
-  }
+  await updateBookmark(mediaId, userId, Boolean(isBookmarked))
+
   return null
 }
 
