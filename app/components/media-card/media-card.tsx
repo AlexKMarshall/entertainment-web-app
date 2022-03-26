@@ -4,10 +4,9 @@ import {
   MovieIcon,
   TVSeriesIcon,
 } from '../icons'
-import { Form, LinksFunction } from 'remix'
+import { Form, LinksFunction, useSubmit } from 'remix'
 
 import { BodyText } from '~/components/body-text'
-import { ChangeEventHandler } from 'react'
 import { Heading } from '~/components/heading'
 import styles from './media-card.css'
 
@@ -39,9 +38,7 @@ export function MediaCard({
   isTrending = false,
   isBookmarked = false,
 }: Props): JSX.Element {
-  const handleBookmarkChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    e.target.form?.submit()
-  }
+  const submit = useSubmit()
 
   return (
     <article
@@ -49,7 +46,10 @@ export function MediaCard({
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
-      <Form method="post">
+      <Form
+        method="post"
+        onChange={(e) => submit(e.currentTarget, { replace: true })}
+      >
         <input type="hidden" value={id} name="mediaId" />
         <label>
           <span className="visually-hidden">Bookmark {title}</span>
@@ -58,7 +58,6 @@ export function MediaCard({
             name="isBookmarked"
             className="visually-hidden"
             defaultChecked={isBookmarked}
-            onChange={handleBookmarkChange}
           />
           <span>
             <BookmarkIcon className="checked" />
