@@ -109,7 +109,7 @@ export default function CatalogType(): JSX.Element {
           <React.Fragment key={category.categoryName}>
             <div className="stack">
               <Heading level={2} size="l">
-                {getCategoryTitle(category.categoryDisplay)}
+                {getCategoryTitle(category.categoryName)}
               </Heading>
 
               <MediaGrid
