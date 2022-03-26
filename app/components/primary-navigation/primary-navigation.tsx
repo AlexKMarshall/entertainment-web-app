@@ -2,12 +2,15 @@
 import { BookmarkIcon, HomeIcon, MovieIcon, TVSeriesIcon } from '../icons'
 import { LinksFunction, NavLink } from 'remix'
 
+import { User } from '~/utils/session.server'
 import styles from './primary-navigation.css'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
-type Props = {}
-export function PrimaryNavigation(props: Props): JSX.Element {
+type Props = {
+  user: User | null
+}
+export function PrimaryNavigation({ user }: Props): JSX.Element {
   return (
     <nav className="primary-navigation">
       <ul role="list">
@@ -29,12 +32,14 @@ export function PrimaryNavigation(props: Props): JSX.Element {
             <span className="visually-hidden">TV Series</span>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="bookmarked">
-            <BookmarkIcon className="nav-icon" />
-            <span className="visually-hidden">Bookmarked shows</span>
-          </NavLink>
-        </li>
+        {user ? (
+          <li>
+            <NavLink to="bookmarked">
+              <BookmarkIcon className="nav-icon" />
+              <span className="visually-hidden">Bookmarked shows</span>
+            </NavLink>
+          </li>
+        ) : null}
       </ul>
     </nav>
   )
