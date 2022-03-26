@@ -1,4 +1,9 @@
-import { BookmarkOutlineIcon, MovieIcon, TVSeriesIcon } from '../icons'
+import {
+  BookmarkIcon,
+  BookmarkOutlineIcon,
+  MovieIcon,
+  TVSeriesIcon,
+} from '../icons'
 import { Form, LinksFunction } from 'remix'
 
 import { BodyText } from '~/components/body-text'
@@ -12,6 +17,7 @@ type Props = {
   rating: string
   isTrending?: boolean
   imageSlug: string
+  isBookmarked?: boolean
 }
 
 export const links: LinksFunction = () => [
@@ -28,6 +34,7 @@ export function MediaCard({
   rating,
   imageSlug,
   isTrending = false,
+  isBookmarked = false,
 }: Props): JSX.Element {
   return (
     <article
@@ -37,7 +44,7 @@ export function MediaCard({
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
       <Form>
         <button type="submit">
-          <BookmarkOutlineIcon />
+          {isBookmarked ? <BookmarkIcon /> : <BookmarkOutlineIcon />}
         </button>
       </Form>
       <div className="info">
