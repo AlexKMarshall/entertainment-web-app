@@ -76,7 +76,7 @@ export function MediaCard({
           uncheckedDisplay={<BookmarkOutlineIcon />}
         />
       </Form>
-      <div className="image-wrapper">
+      <div className="image-wrapper layer">
         <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
         <div className="play-button" id={playButtonId}>
           <PlayIcon />

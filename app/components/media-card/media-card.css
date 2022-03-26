@@ -70,15 +70,8 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  display: grid;
-  grid-template-areas: 'layer';
   place-items: center;
   isolation: isolate;
-}
-
-.media-card .image-wrapper > * {
-  grid-area: layer;
-  position: relative;
 }
 
 .media-card img {
