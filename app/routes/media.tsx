@@ -42,6 +42,7 @@ export default function Media() {
         <Masthead
           navigation={<PrimaryNavigation user={data.user} />}
           avatar={<Avatar src="/assets/image-avatar.png" />}
+          isLoggedIn={Boolean(data.user)}
         />
       </header>
       <main className="container stack stack-large">
