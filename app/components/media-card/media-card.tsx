@@ -7,10 +7,12 @@ import {
 import { Form, LinksFunction } from 'remix'
 
 import { BodyText } from '~/components/body-text'
+import { ChangeEventHandler } from 'react'
 import { Heading } from '~/components/heading'
 import styles from './media-card.css'
 
 type Props = {
+  id: string
   title: string
   year: number
   category: string
@@ -28,6 +30,7 @@ export const links: LinksFunction = () => [
 ]
 
 export function MediaCard({
+  id,
   title,
   year,
   category,
@@ -36,13 +39,18 @@ export function MediaCard({
   isTrending = false,
   isBookmarked = false,
 }: Props): JSX.Element {
+  const handleBookmarkChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.target.form?.submit()
+  }
+
   return (
     <article
       className="media-card"
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
-      <Form>
+      <Form method="post">
+        <input type="hidden" value={id} name="mediaId" />
         <label>
           <span className="visually-hidden">Bookmark {title}</span>
           <input
@@ -50,6 +58,7 @@ export function MediaCard({
             name="isBookmarked"
             className="visually-hidden"
             defaultChecked={isBookmarked}
+            onChange={handleBookmarkChange}
           />
           <span>
             <BookmarkIcon className="checked" />

@@ -1,4 +1,11 @@
-import { Form, LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import {
+  ActionFunction,
+  Form,
+  LinksFunction,
+  LoaderFunction,
+  json,
+  useLoaderData,
+} from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
@@ -6,10 +13,10 @@ import {
   SearchInput,
   links as searchInputLinks,
 } from '~/components/search-input'
+import { getUserId, requireUserId } from '~/utils/session.server'
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
-import { getUserId } from '~/utils/session.server'
 
 type LoaderData = {
   categoryName: string
@@ -23,6 +30,34 @@ export const links: LinksFunction = () => [
   ...mediaGridLinks(),
   ...searchInputLinks(),
 ]
+
+export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request)
+  const formData = await request.formData()
+  const isBookmarked = formData.get('isBookmarked')
+  const mediaId = formData.get('mediaId')
+
+  if (isBookmarked && typeof mediaId === 'string') {
+    await db.media.update({
+      where: { id: mediaId },
+      data: {
+        users: { connect: { id: userId } },
+      },
+    })
+  }
+
+  if (!isBookmarked && typeof mediaId === 'string') {
+    await db.media.update({
+      where: { id: mediaId },
+      data: {
+        users: {
+          disconnect: { id: userId },
+        },
+      },
+    })
+  }
+  return null
+}
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { category } = params
@@ -65,8 +100,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     })
   }
 
-  console.log(dbCategory)
-
   const data: LoaderData = {
     categoryName: dbCategory.name,
     categoryDisplay: dbCategory.display,
@@ -101,6 +134,7 @@ export default function CatalogType(): JSX.Element {
           renderItem={(mediaItem) => (
             <MediaCard
               key={mediaItem.id}
+              id={mediaItem.id}
               title={mediaItem.title}
               year={mediaItem.year}
               category={mediaItem.category}
