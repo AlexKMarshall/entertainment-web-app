@@ -1,0 +1,17 @@
+.media-meta dd {
+  --_media-meta-gap: var(--media-meta-gap, 0.5rem);
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.media-meta svg {
+  display: inline-block;
+  width: 0.9em;
+  opacity: 0.75;
+  margin-inline-end: var(--_media-meta-gap);
+}
+
+.media-card dd:not(:last-child)::after {
+  content: '\2022';
+  margin-inline: var(--_media-meta-gap);
+}

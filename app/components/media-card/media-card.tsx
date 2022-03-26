@@ -1,16 +1,10 @@
-import {
-  BookmarkIcon,
-  BookmarkOutlineIcon,
-  MovieIcon,
-  TVSeriesIcon,
-} from '../icons'
+import { BookmarkIcon, BookmarkOutlineIcon, PlayIcon } from '~/components/icons'
 import { Form, Link, LinksFunction, useSubmit } from 'remix'
-import { MouseEventHandler, useRef } from 'react'
+import { MediaMeta, links as mediaMetaLinks } from '~/components/media-meta'
 
-import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
-import { PlayIcon } from '../icons/play'
 import styles from './media-card.css'
+import { useRef } from 'react'
 
 type Props = {
   id: string
@@ -28,6 +22,7 @@ export const links: LinksFunction = () => [
     rel: 'stylesheet',
     href: styles,
   },
+  ...mediaMetaLinks(),
 ]
 
 export function MediaCard({
@@ -93,47 +88,6 @@ export function MediaCard({
         </div>
       </div>
     </article>
-  )
-}
-
-function getCategoryIcon(category: string): JSX.Element {
-  switch (category) {
-    case 'Movie':
-      return <MovieIcon />
-    case 'TV Series':
-      return <TVSeriesIcon />
-    default:
-      return <></>
-  }
-}
-
-type MediaMetaProps = {
-  year: number
-  category: string
-  rating: string
-  size: 'm' | 's'
-}
-function MediaMeta({
-  year,
-  category,
-  rating,
-  size,
-}: MediaMetaProps): JSX.Element {
-  return (
-    <dl>
-      <dt className="visually-hidden">Year released</dt>
-      <BodyText component="dd" size={size}>
-        {year}
-      </BodyText>
-      <dt className="visually-hidden">Category</dt>
-      <BodyText component="dd" size={size}>
-        {getCategoryIcon(category)} {category}
-      </BodyText>
-      <dt className="visually-hidden">Age rating</dt>
-      <BodyText component="dd" size={size}>
-        {rating}
-      </BodyText>
-    </dl>
   )
 }
 
