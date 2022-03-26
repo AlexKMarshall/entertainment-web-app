@@ -8,6 +8,7 @@ import { Form, Link, LinksFunction, useSubmit } from 'remix'
 
 import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
+import { PlayIcon } from '../icons/play'
 import styles from './media-card.css'
 
 type Props = {
@@ -45,7 +46,6 @@ export function MediaCard({
       className="media-card"
       {...(isTrending ? { 'data-trending': true } : {})}
     >
-      <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
       <div className="info">
         <Heading level={3} size={isTrending ? 'm' : 's'}>
           <Link to=".">{title}</Link>
@@ -76,6 +76,13 @@ export function MediaCard({
           </span>
         </label>
       </Form>
+      <div className="image-wrapper">
+        <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
+        <div className="play-button">
+          <PlayIcon />
+          Play
+        </div>
+      </div>
     </article>
   )
 }
@@ -156,15 +163,13 @@ function MediaImage({ imageSlug, isTrending }: MediaImageProps): JSX.Element {
   const height = isTrending ? 140 : 110
 
   return (
-    <div className="image-wrapper">
-      <img
-        srcSet={srcSet}
-        sizes={sizes}
-        src={`${imageBasePath}/small.jpg`}
-        alt=""
-        width={width}
-        height={height}
-      />
-    </div>
+    <img
+      srcSet={srcSet}
+      sizes={sizes}
+      src={`${imageBasePath}/small.jpg`}
+      alt=""
+      width={width}
+      height={height}
+    />
   )
 }
