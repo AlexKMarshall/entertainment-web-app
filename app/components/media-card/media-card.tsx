@@ -43,9 +43,19 @@ export function MediaCard({
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
       <Form>
-        <button type="submit">
-          {isBookmarked ? <BookmarkIcon /> : <BookmarkOutlineIcon />}
-        </button>
+        <label>
+          <span className="visually-hidden">Bookmark {title}</span>
+          <input
+            type="checkbox"
+            name="isBookmarked"
+            className="visually-hidden"
+            defaultChecked={isBookmarked}
+          />
+          <span>
+            <BookmarkIcon className="checked" />
+            <BookmarkOutlineIcon className="unchecked" />
+          </span>
+        </label>
       </Form>
       <div className="info">
         <MediaMeta
