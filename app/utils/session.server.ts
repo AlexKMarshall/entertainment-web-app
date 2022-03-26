@@ -8,6 +8,11 @@ type LoginForm = {
   password: string
 }
 
+export type User = {
+  id: string
+  email: string
+}
+
 export async function register({ email, password }: LoginForm) {
   const passwordHash = await bcrypt.hash(password, 10)
   try {
