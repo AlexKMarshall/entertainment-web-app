@@ -1,4 +1,4 @@
-import { Link, LinksFunction } from 'remix'
+import { Form, Link, LinksFunction } from 'remix'
 
 import { LogoIcon } from '~/components/icons'
 import { ReactNode } from 'react'
@@ -18,7 +18,12 @@ export function Masthead({ navigation, avatar }: Props): JSX.Element {
         <h1 className="visually-hidden">Entertainment Company</h1>
       </Link>
       {navigation}
-      {avatar}
+      <Form method="post" action="/logout">
+        <button>
+          <span className="visually=hidden">Logout</span>
+          {avatar}
+        </button>
+      </Form>
     </div>
   )
 }
