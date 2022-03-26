@@ -31,6 +31,7 @@
   grid-area: info;
   display: flex;
   flex-direction: column-reverse;
+  z-index: 2;
 }
 
 .media-card[data-trending] .info {
