@@ -4,7 +4,7 @@ import {
   MovieIcon,
   TVSeriesIcon,
 } from '../icons'
-import { Form, LinksFunction, useSubmit } from 'remix'
+import { Form, Link, LinksFunction, useSubmit } from 'remix'
 
 import { BodyText } from '~/components/body-text'
 import { Heading } from '~/components/heading'
@@ -48,7 +48,7 @@ export function MediaCard({
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
       <div className="info">
         <Heading level={3} size={isTrending ? 'm' : 's'}>
-          {title}
+          <Link to=".">{title}</Link>
         </Heading>
         <MediaMeta
           year={year}
