@@ -73,3 +73,7 @@
 .align-self-center {
   align-self: center;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
