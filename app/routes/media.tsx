@@ -36,13 +36,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Media() {
   const data = useLoaderData<LoaderData>()
+  const isLoggedIn = Boolean(data.user)
   return (
     <div className="browse">
       <header>
         <Masthead
-          navigation={<PrimaryNavigation user={data.user} />}
+          navigation={<PrimaryNavigation isLoggedIn={isLoggedIn} />}
           avatar={<Avatar src="/assets/image-avatar.png" />}
-          isLoggedIn={Boolean(data.user)}
+          isLoggedIn={isLoggedIn}
         />
       </header>
       <main className="container stack stack-large">
