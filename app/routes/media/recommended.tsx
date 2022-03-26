@@ -1,4 +1,11 @@
-import { Form, LinksFunction, LoaderFunction, json, useLoaderData } from 'remix'
+import {
+  ActionFunction,
+  Form,
+  LinksFunction,
+  LoaderFunction,
+  json,
+  useLoaderData,
+} from 'remix'
 import { Heading, links as headingLinks } from '~/components/heading'
 import { MediaCard, links as mediaCardLinks } from '~/components/media-card'
 import { MediaGrid, links as mediaGridLinks } from '~/components/media-grid'
@@ -10,6 +17,7 @@ import {
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
+import { requireUserId } from '~/utils/session.server'
 
 type LoaderData = {
   trending: Media[]
@@ -23,6 +31,34 @@ export const links: LinksFunction = () => [
   ...mediaReelLinks(),
   ...searchInputLinks(),
 ]
+
+export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request)
+  const formData = await request.formData()
+  const isBookmarked = formData.get('isBookmarked')
+  const mediaId = formData.get('mediaId')
+
+  if (isBookmarked && typeof mediaId === 'string') {
+    await db.media.update({
+      where: { id: mediaId },
+      data: {
+        users: { connect: { id: userId } },
+      },
+    })
+  }
+
+  if (!isBookmarked && typeof mediaId === 'string') {
+    await db.media.update({
+      where: { id: mediaId },
+      data: {
+        users: {
+          disconnect: { id: userId },
+        },
+      },
+    })
+  }
+  return null
+}
 
 export const loader: LoaderFunction = async () => {
   const selectMedia = {
@@ -86,6 +122,7 @@ export default function Recommended(): JSX.Element {
             renderItem={(mediaItem) => (
               <MediaCard
                 key={mediaItem.id}
+                id={mediaItem.id}
                 title={mediaItem.title}
                 year={mediaItem.year}
                 category={mediaItem.category}
@@ -107,6 +144,7 @@ export default function Recommended(): JSX.Element {
           renderItem={(mediaItem) => (
             <MediaCard
               key={mediaItem.id}
+              id={mediaItem.id}
               title={mediaItem.title}
               year={mediaItem.year}
               category={mediaItem.category}
