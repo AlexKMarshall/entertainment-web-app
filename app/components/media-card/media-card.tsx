@@ -1,8 +1,9 @@
 import { BookmarkIcon, BookmarkOutlineIcon } from '~/components/icons'
 import { Checkbox, links as checkboxLinks } from '~/components/checkbox'
 import { Form, Link, LinksFunction, useSubmit } from 'remix'
+import { MediaImage, links as mediaImageLinks } from '~/components/media-image'
 import { MediaMeta, links as mediaMetaLinks } from '~/components/media-meta'
-import { PlayButton, links as playButtonLinks } from '../play-button'
+import { PlayButton, links as playButtonLinks } from '~/components/play-button'
 
 import { Heading } from '~/components/heading'
 import styles from './media-card.css'
@@ -27,6 +28,7 @@ export const links: LinksFunction = () => [
   ...mediaMetaLinks(),
   ...checkboxLinks(),
   ...playButtonLinks(),
+  ...mediaImageLinks(),
 ]
 
 export function MediaCard({
@@ -83,51 +85,5 @@ export function MediaCard({
         <PlayButton id={playButtonId} />
       </div>
     </article>
-  )
-}
-
-type MediaImageProps = {
-  imageSlug: string
-  isTrending: boolean
-}
-function MediaImage({ imageSlug, isTrending }: MediaImageProps): JSX.Element {
-  const imageRoot = '/assets/thumbnails'
-  const imageBasePath = `${imageRoot}/${imageSlug}/${
-    isTrending ? 'trending' : 'regular'
-  }`
-
-  const trendingSrcSet = `
-    ${imageBasePath}/small.jpg 480w,
-    ${imageBasePath}/large.jpg 940w
-  `
-  const regularSrcSet = `
-    ${imageBasePath}/small.jpg 328w,
-    ${imageBasePath}/medium.jpg 440w,
-    ${imageBasePath}/large.jpg 560w,
-  `
-  const srcSet = isTrending ? trendingSrcSet : regularSrcSet
-
-  const trendingSizes = `
-    (max-width: 375px) 240px,
-    470px
-  `
-  const regularSizes = `
-    (max-width: 375px) 164px,
-    (max-width: 768px) 220px,
-    280px
-  `
-  const sizes = isTrending ? trendingSizes : regularSizes
-  const width = isTrending ? 240 : 164
-  const height = isTrending ? 140 : 110
-
-  return (
-    <img
-      srcSet={srcSet}
-      sizes={sizes}
-      src={`${imageBasePath}/small.jpg`}
-      alt=""
-      width={width}
-      height={height}
-    />
   )
 }
