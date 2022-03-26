@@ -1,4 +1,5 @@
 import { BookmarkIcon, BookmarkOutlineIcon, PlayIcon } from '~/components/icons'
+import { Checkbox, links as checkboxLinks } from '~/components/checkbox'
 import { Form, Link, LinksFunction, useSubmit } from 'remix'
 import { MediaMeta, links as mediaMetaLinks } from '~/components/media-meta'
 
@@ -23,6 +24,7 @@ export const links: LinksFunction = () => [
     href: styles,
   },
   ...mediaMetaLinks(),
+  ...checkboxLinks(),
 ]
 
 export function MediaCard({
@@ -66,19 +68,13 @@ export function MediaCard({
         onChange={(e) => submit(e.currentTarget, { replace: true })}
       >
         <input type="hidden" value={id} name="mediaId" />
-        <label>
-          <span className="visually-hidden">Bookmark {title}</span>
-          <input
-            type="checkbox"
-            name="isBookmarked"
-            className="visually-hidden"
-            defaultChecked={isBookmarked}
-          />
-          <span>
-            <BookmarkIcon className="checked" />
-            <BookmarkOutlineIcon className="unchecked" />
-          </span>
-        </label>
+        <Checkbox
+          name="isBookmarked"
+          defaultChecked={isBookmarked}
+          label={`Bookmark ${title}`}
+          checkedDisplay={<BookmarkIcon />}
+          uncheckedDisplay={<BookmarkOutlineIcon />}
+        />
       </Form>
       <div className="image-wrapper">
         <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
