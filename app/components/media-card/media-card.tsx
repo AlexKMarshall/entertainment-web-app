@@ -1,7 +1,8 @@
-import { BookmarkIcon, BookmarkOutlineIcon, PlayIcon } from '~/components/icons'
+import { BookmarkIcon, BookmarkOutlineIcon } from '~/components/icons'
 import { Checkbox, links as checkboxLinks } from '~/components/checkbox'
 import { Form, Link, LinksFunction, useSubmit } from 'remix'
 import { MediaMeta, links as mediaMetaLinks } from '~/components/media-meta'
+import { PlayButton, links as playButtonLinks } from '../play-button'
 
 import { Heading } from '~/components/heading'
 import styles from './media-card.css'
@@ -25,6 +26,7 @@ export const links: LinksFunction = () => [
   },
   ...mediaMetaLinks(),
   ...checkboxLinks(),
+  ...playButtonLinks(),
 ]
 
 export function MediaCard({
@@ -78,10 +80,7 @@ export function MediaCard({
       </Form>
       <div className="image-wrapper layer">
         <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
-        <div className="play-button" id={playButtonId}>
-          <PlayIcon />
-          Play
-        </div>
+        <PlayButton id={playButtonId} />
       </div>
     </article>
   )

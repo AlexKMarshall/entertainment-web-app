@@ -47,24 +47,6 @@
   }
 }
 
-.media-card .play-button {
-  display: flex;
-  gap: var(--space-xs-xs);
-  padding: 0.5rem;
-  background-color: var(--gray-400-25pc);
-  border-radius: 999px;
-  padding-inline-end: var(--space-s-s);
-  align-items: center;
-  font-size: var(--font-size-300);
-  opacity: var(--play-button-opacity);
-  transition: opacity 200ms linear;
-  z-index: 3;
-}
-
-.media-card .play-button svg {
-  width: var(--space-s-m);
-}
-
 .media-card .image-wrapper {
   grid-area: image;
   position: relative;
