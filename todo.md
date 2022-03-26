@@ -6,3 +6,6 @@ refactor nested CSS
 extract image logic
 write readme
 All focus/active states
+remaining responsive sizing
+refactor route actions
+refactor route loaders
