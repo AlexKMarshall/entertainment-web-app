@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { HomeIcon, MovieIcon, TVSeriesIcon } from '../icons'
+import { BookmarkIcon, HomeIcon, MovieIcon, TVSeriesIcon } from '../icons'
 import { LinksFunction, NavLink } from 'remix'
 
 import styles from './primary-navigation.css'
@@ -27,6 +27,12 @@ export function PrimaryNavigation(props: Props): JSX.Element {
           <NavLink to="tv-series">
             <TVSeriesIcon className="nav-icon" />
             <span className="visually-hidden">TV Series</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="bookmarked">
+            <BookmarkIcon className="nav-icon" />
+            <span className="visually-hidden">Bookmarked shows</span>
           </NavLink>
         </li>
       </ul>

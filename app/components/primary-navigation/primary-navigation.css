@@ -15,7 +15,8 @@
 }
 
 .primary-navigation svg {
-  width: 1rem;
+  height: 1.25rem;
+  width: auto;
 }
 
 .primary-navigation a {
