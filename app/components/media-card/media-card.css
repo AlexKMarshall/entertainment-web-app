@@ -23,6 +23,10 @@
   color: inherit;
 }
 
+.media-card:focus-within a {
+  outline: none;
+}
+
 .media-card .info {
   grid-area: info;
   display: flex;
