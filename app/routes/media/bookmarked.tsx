@@ -103,31 +103,33 @@ export default function CatalogType(): JSX.Element {
         />
         <input type="hidden" name="bookmarked" value="true" />
       </Form>
-      {data.map((category) => (
-        <React.Fragment key={category.categoryName}>
-          <div className="stack">
-            <Heading level={2} size="l">
-              {getCategoryTitle(category.categoryDisplay)}
-            </Heading>
+      {data
+        .filter((category) => category.media.length > 0)
+        .map((category) => (
+          <React.Fragment key={category.categoryName}>
+            <div className="stack">
+              <Heading level={2} size="l">
+                {getCategoryTitle(category.categoryDisplay)}
+              </Heading>
 
-            <MediaGrid
-              items={category.media}
-              renderItem={(mediaItem) => (
-                <MediaCard
-                  key={mediaItem.id}
-                  id={mediaItem.id}
-                  title={mediaItem.title}
-                  year={mediaItem.year}
-                  category={mediaItem.category}
-                  rating={mediaItem.rating}
-                  imageSlug={mediaItem.imageSlug}
-                  isBookmarked={mediaItem.isBookmarked}
-                />
-              )}
-            />
-          </div>
-        </React.Fragment>
-      ))}
+              <MediaGrid
+                items={category.media}
+                renderItem={(mediaItem) => (
+                  <MediaCard
+                    key={mediaItem.id}
+                    id={mediaItem.id}
+                    title={mediaItem.title}
+                    year={mediaItem.year}
+                    category={mediaItem.category}
+                    rating={mediaItem.rating}
+                    imageSlug={mediaItem.imageSlug}
+                    isBookmarked={mediaItem.isBookmarked}
+                  />
+                )}
+              />
+            </div>
+          </React.Fragment>
+        ))}
     </>
   )
 }
