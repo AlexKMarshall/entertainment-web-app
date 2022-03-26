@@ -1,0 +1,42 @@
+.checkbox {
+  min-width: 40px;
+  height: auto;
+  display: grid;
+  place-items: center;
+  background-color: var(--gray-100-50pc);
+  border: none;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  transition: background-color 200ms linear, color 200ms linear;
+}
+
+.checkbox:hover,
+.checkbox:focus-within {
+  background-color: var(--gray-400);
+  color: var(--gray-100);
+}
+
+.checkbox span {
+  place-items: center;
+}
+
+.checkbox input:not(:checked) + span {
+  --checked-opacity: 0;
+  --unchecked-opacity: 1;
+}
+
+.checkbox input:checked + span {
+  --checked-opacity: 1;
+  --unchecked-opacity: 0;
+}
+
+.checkbox .checked {
+  opacity: var(--checked-opacity);
+  transition: opacity 200ms linear;
+}
+
+.checkbox .unchecked {
+  opacity: var(--unchecked-opacity);
+  transition: opacity 200ms linear;
+}
