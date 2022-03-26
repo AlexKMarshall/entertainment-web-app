@@ -8,6 +8,15 @@
     'info';
 }
 
+.media-card:hover {
+  cursor: pointer;
+}
+
+.media-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .media-card .info {
   grid-area: info;
   display: flex;
@@ -55,6 +64,12 @@
   object-fit: cover;
   height: auto;
   width: 100%;
+  transition: filter 200ms linear;
+}
+
+.media-card:hover img,
+.media-card:focus-within img {
+  filter: brightness(0.5);
 }
 
 .media-card[data-trending] .image-wrapper::after {
