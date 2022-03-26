@@ -10,6 +10,7 @@ import {
 import { Heading, links as headingLinks } from '~/components/heading'
 import { createUserSession, register } from '~/utils/session.server'
 
+import { BodyText } from '~/components/body-text'
 import { LogoIcon } from '~/components/icons'
 import styles from '~/styles/routes/login.css'
 import { z } from 'zod'
@@ -21,9 +22,9 @@ export const links: LinksFunction = () => [
 
 const registerFormSchema = z
   .object({
-    email: z.string().email(),
-    password: z.string().min(5),
-    confirmPassword: z.string().min(5),
+    email: z.string().email('Invalid email').nonempty("Can't be empty"),
+    password: z.string().nonempty("Can't be empty"),
+    confirmPassword: z.string().nonempty("Can't be empty"),
     redirectTo: z.string(),
   })
   .refine((obj) => obj.password === obj.confirmPassword, {
@@ -103,74 +104,84 @@ export default function RegisterPage(): JSX.Element {
           value={searchParams.get('redirectTo') ?? undefined}
         />
         <div className="stack">
-          <label>
-            <span className="visually-hidden">Email Address</span>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              defaultValue={actionData?.fields?.email}
-              aria-invalid={Boolean(actionData?.fieldErrors.email?.length)}
-              aria-errormessage={
-                actionData?.fieldErrors.email?.length
-                  ? 'email-error'
-                  : undefined
-              }
-            />
-          </label>
-          {actionData?.fieldErrors.email?.length ? (
-            <div id="username-error" role="alert">
-              {actionData.fieldErrors.email.map((error) => (
-                <p key={error}>{error}</p>
+          <div>
+            <label>
+              <span className="visually-hidden">Email Address</span>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                defaultValue={actionData?.fields?.email}
+                aria-invalid={Boolean(actionData?.fieldErrors.email?.length)}
+                aria-errormessage={
+                  actionData?.fieldErrors.email?.length
+                    ? 'email-error'
+                    : undefined
+                }
+              />
+            </label>
+            <div id="username-error" aria-live="polite" className="error">
+              {actionData?.fieldErrors?.email?.map((error) => (
+                <BodyText size="s" color="error" key={error}>
+                  {error}
+                </BodyText>
               ))}
             </div>
-          ) : null}
-          <label>
-            <span className="visually-hidden">Password</span>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              defaultValue={actionData?.fields?.password}
-              aria-invalid={Boolean(actionData?.fieldErrors.password?.length)}
-              aria-errormessage={
-                actionData?.fieldErrors.password?.length
-                  ? 'password-error'
-                  : undefined
-              }
-            />
-          </label>
-          {actionData?.fieldErrors.password?.length ? (
-            <div id="password-error" role="alert">
-              {actionData.fieldErrors.password.map((error) => (
-                <p key={error}>{error}</p>
+          </div>
+          <div>
+            <label>
+              <span className="visually-hidden">Password</span>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                defaultValue={actionData?.fields?.password}
+                aria-invalid={Boolean(actionData?.fieldErrors.password?.length)}
+                aria-errormessage={
+                  actionData?.fieldErrors.password?.length
+                    ? 'password-error'
+                    : undefined
+                }
+              />
+            </label>
+            <div id="password-error" aria-live="polite" className="error">
+              {actionData?.fieldErrors?.password?.map((error) => (
+                <BodyText size="s" color="error" key={error}>
+                  {error}
+                </BodyText>
               ))}
             </div>
-          ) : null}
-          <label>
-            <span className="visually-hidden">Repeat Password</span>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Repeat Password"
-              defaultValue={actionData?.fields?.confirmPassword}
-              aria-invalid={Boolean(
-                actionData?.fieldErrors.confirmPassword?.length
-              )}
-              aria-errormessage={
-                actionData?.fieldErrors.confirmPassword?.length
-                  ? 'confirm-password-error'
-                  : undefined
-              }
-            />
-          </label>
-          {actionData?.fieldErrors.confirmPassword?.length ? (
-            <div id="confirm-password-error" role="alert">
-              {actionData.fieldErrors.confirmPassword.map((error) => (
-                <p key={error}>{error}</p>
+          </div>
+          <div>
+            <label>
+              <span className="visually-hidden">Repeat Password</span>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Repeat Password"
+                defaultValue={actionData?.fields?.confirmPassword}
+                aria-invalid={Boolean(
+                  actionData?.fieldErrors.confirmPassword?.length
+                )}
+                aria-errormessage={
+                  actionData?.fieldErrors.confirmPassword?.length
+                    ? 'confirm-password-error'
+                    : undefined
+                }
+              />
+            </label>
+            <div
+              id="confirm-password-error"
+              aria-live="polite"
+              className="error"
+            >
+              {actionData?.fieldErrors?.confirmPassword?.map((error) => (
+                <BodyText size="s" color="error" key={error}>
+                  {error}
+                </BodyText>
               ))}
             </div>
-          ) : null}
+          </div>
         </div>
         <div className="stack">
           <button type="submit">Create an account</button>
