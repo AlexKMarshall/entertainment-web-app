@@ -9,6 +9,7 @@ import {
 
 import { Media } from '~/media'
 import { db } from '~/utils/db.server'
+import { getUserId } from '~/utils/session.server'
 
 type LoaderData = {
   categoryName: string
@@ -23,8 +24,9 @@ export const links: LinksFunction = () => [
   ...searchInputLinks(),
 ]
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
   const { category } = params
+  const userId = await getUserId(request)
 
   const dbCategory = await db.category.findUnique({
     where: { name: category },
@@ -38,10 +40,20 @@ export const loader: LoaderFunction = async ({ params }) => {
           title: true,
           year: true,
           rating: true,
-          category: {
-            select: { display: true },
-          },
           image: true,
+          category: {
+            select: {
+              display: true,
+            },
+          },
+          users: {
+            select: {
+              id: true,
+            },
+            where: {
+              id: userId ?? undefined,
+            },
+          },
         },
       },
     },
@@ -53,6 +65,8 @@ export const loader: LoaderFunction = async ({ params }) => {
     })
   }
 
+  console.log(dbCategory)
+
   const data: LoaderData = {
     categoryName: dbCategory.name,
     categoryDisplay: dbCategory.display,
@@ -60,6 +74,7 @@ export const loader: LoaderFunction = async ({ params }) => {
       ...item,
       category: item.category.display,
       imageSlug: item.image,
+      isBookmarked: item.users.length > 0,
     })),
   }
   return json(data)
@@ -91,6 +106,7 @@ export default function CatalogType(): JSX.Element {
               category={mediaItem.category}
               rating={mediaItem.rating}
               imageSlug={mediaItem.imageSlug}
+              isBookmarked={mediaItem.isBookmarked}
             />
           )}
         />

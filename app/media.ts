@@ -5,6 +5,7 @@ export type Media = {
   rating: string
   id: string
   imageSlug: string
+  isBookmarked?: boolean
 }
 
 export const selectMedia = {
