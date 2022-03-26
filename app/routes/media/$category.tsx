@@ -100,14 +100,26 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json(data)
 }
 
+const getSearchLabelCategory = (category: string): string => {
+  switch (category) {
+    case 'movie':
+      return 'movies'
+    case 'tv-series':
+      return 'TV series'
+    default:
+      return category
+  }
+}
+
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
+  const searchLabel = `Search for ${getSearchLabelCategory(data.categoryName)}`
   return (
     <>
       <Form method="get" action="/media/search">
         <SearchInput
           inputProps={{ id: 'search', name: 'query' }}
-          label={`Search for ${data.categoryDisplay}`}
+          label={searchLabel}
         />
         <input type="hidden" name="category" value={data.categoryName} />
       </Form>
