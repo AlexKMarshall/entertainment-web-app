@@ -1,5 +1,6 @@
 .media-card {
   --meta-gap: 0.375rem;
+  --play-button-opacity: 0;
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
@@ -10,6 +11,11 @@
 
 .media-card:hover {
   cursor: pointer;
+}
+
+.media-card:hover,
+.media-card:focus-within {
+  --play-button-opacity: 1;
 }
 
 .media-card a {
@@ -53,11 +59,37 @@
   margin-inline: var(--meta-gap);
 }
 
+.media-card .play-button {
+  display: flex;
+  gap: var(--space-xs-xs);
+  padding: 0.5rem;
+  background-color: var(--gray-400-25pc);
+  border-radius: 999px;
+  padding-inline-end: var(--space-s-s);
+  align-items: center;
+  font-size: var(--font-size-300);
+  opacity: var(--play-button-opacity);
+  transition: opacity 200ms linear;
+}
+
+.media-card .play-button svg {
+  width: var(--space-s-m);
+}
+
 .media-card .image-wrapper {
   grid-area: image;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  display: grid;
+  grid-template-areas: 'layer';
+  place-items: center;
+  isolation: isolate;
+}
+
+.media-card .image-wrapper > * {
+  grid-area: layer;
+  position: relative;
 }
 
 .media-card img {
@@ -105,6 +137,7 @@
   align-self: start;
   justify-self: end;
   padding: 0.5rem;
+  z-index: 2;
 }
 
 .media-card form label {
