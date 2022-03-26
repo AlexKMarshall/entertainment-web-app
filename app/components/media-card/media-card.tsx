@@ -46,6 +46,17 @@ export function MediaCard({
       {...(isTrending ? { 'data-trending': true } : {})}
     >
       <MediaImage imageSlug={imageSlug} isTrending={isTrending} />
+      <div className="info">
+        <Heading level={3} size={isTrending ? 'm' : 's'}>
+          {title}
+        </Heading>
+        <MediaMeta
+          year={year}
+          category={category}
+          rating={rating}
+          size={isTrending ? 'm' : 's'}
+        />
+      </div>
       <Form
         method="post"
         onChange={(e) => submit(e.currentTarget, { replace: true })}
@@ -65,17 +76,6 @@ export function MediaCard({
           </span>
         </label>
       </Form>
-      <div className="info">
-        <Heading level={3} size={isTrending ? 'm' : 's'}>
-          {title}
-        </Heading>
-        <MediaMeta
-          year={year}
-          category={category}
-          rating={rating}
-          size={isTrending ? 'm' : 's'}
-        />
-      </div>
     </article>
   )
 }
