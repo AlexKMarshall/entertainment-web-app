@@ -27,6 +27,7 @@
 .media-reel > li {
   scroll-snap-align: start;
   transition: opacity 0.5s linear;
+  max-width: 90vw;
 }
 
 .media-reel > .faded {
