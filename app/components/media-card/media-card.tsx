@@ -46,7 +46,7 @@ export function MediaCard({
   const handleCardClick = () => {
     linkRef.current?.click()
   }
-  const playButtonId = `${id}-play`
+  const playButtonId = `${id}-${isTrending ? 'trending' : ''}-play`
 
   return (
     <article
