@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-redundant-roles */
 import { BookmarkIcon, HomeIcon, MovieIcon, TVSeriesIcon } from '../icons'
 import { LinksFunction, NavLink } from 'remix'
 
@@ -12,7 +11,7 @@ type Props = {
 export function PrimaryNavigation({ isLoggedIn }: Props): JSX.Element {
   return (
     <nav className="primary-navigation">
-      <ul role="list">
+      <ul>
         <li>
           <NavLink to="recommended">
             <HomeIcon className="nav-icon" />

@@ -35,8 +35,7 @@ export function MediaReel({ items, renderItem }: Props): JSX.Element {
   }, [])
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-redundant-roles
-    <ul className="media-reel" ref={reelRef} role="list">
+    <ul className="media-reel" ref={reelRef}>
       {items.map((item) => (
         <MediaReelItem
           key={item.id}
