@@ -24,9 +24,9 @@ export function MediaReel({ items, renderItem }: Props): JSX.Element {
     const toggleInert: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0.5) {
-          entry.target.removeAttribute('inert')
+          entry.target.classList.remove('faded')
         } else {
-          entry.target.setAttribute('inert', 'inert')
+          entry.target.classList.add('faded')
         }
       })
     }
