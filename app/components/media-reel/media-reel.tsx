@@ -16,26 +16,6 @@ export function MediaReel({ items, renderItem }: Props): JSX.Element {
     useState<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    const toggleOverflowClass = (el: Element) => {
-      el.classList.toggle('overflowing', el.scrollWidth > el.clientWidth)
-    }
-
-    const reel = reelRef.current
-    if (reel) {
-      const observer = new ResizeObserver((entries) => {
-        const [{ target }] = entries
-        toggleOverflowClass(target)
-      })
-
-      observer.observe(reel)
-
-      return () => {
-        observer.disconnect()
-      }
-    }
-  }, [])
-
-  useEffect(() => {
     const options = {
       root: reelRef.current,
       threshold: 0.5,
