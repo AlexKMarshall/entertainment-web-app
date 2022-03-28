@@ -13,7 +13,7 @@ export function PrimaryNavigation({ isLoggedIn }: Props): JSX.Element {
     <nav className="primary-navigation">
       <ul>
         <li>
-          <NavLink to="recommended">
+          <NavLink to="/">
             <HomeIcon className="nav-icon" />
             <span className="visually-hidden">Home</span>
           </NavLink>

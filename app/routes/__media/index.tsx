@@ -112,7 +112,7 @@ export default function Recommended(): JSX.Element {
   const data = useLoaderData<LoaderData>()
   return (
     <>
-      <Form method="get" action="/media/search">
+      <Form method="get" action="/search">
         <SearchInput
           inputProps={{ id: 'search', name: 'query' }}
           label="Search for movies or TV Series"

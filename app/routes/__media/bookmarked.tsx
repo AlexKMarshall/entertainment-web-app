@@ -14,15 +14,16 @@ import {
   SearchInput,
   links as searchInputLinks,
 } from '~/components/search-input'
-import { getUserId, requireUserId } from '~/utils/session.server'
 
+import React from 'react'
 import { db } from '~/utils/db.server'
+import { requireUserId } from '~/utils/session.server'
 
 type LoaderData = {
   categoryName: string
   categoryDisplay: string
   media: Media[]
-}
+}[]
 
 export const links: LinksFunction = () => [
   ...mediaCardLinks(),
@@ -46,15 +47,13 @@ export const action: ActionFunction = async ({ request }) => {
   return null
 }
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-  const { category } = params
-  const userId = await getUserId(request)
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await requireUserId(request)
 
-  const dbCategory = await db.category.findUnique({
-    where: { name: category },
+  const results = await db.category.findMany({
     select: {
-      display: true,
       name: true,
+      display: true,
       media: {
         take: 20,
         select: {
@@ -68,12 +67,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
               display: true,
             },
           },
+        },
+        where: {
           users: {
-            select: {
-              id: true,
-            },
-            where: {
-              id: userId ?? undefined,
+            some: {
+              id: userId,
             },
           },
         },
@@ -81,58 +79,62 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     },
   })
 
-  if (!dbCategory) {
-    throw new Response(`Cannot find category with name ${category}`, {
-      status: 404,
-    })
-  }
-
-  const data: LoaderData = {
-    categoryName: dbCategory.name,
-    categoryDisplay: dbCategory.display,
-    media: dbCategory.media.map((item) => ({
-      ...item,
-      category: item.category.display,
-      imageSlug: item.image,
-      isBookmarked: item.users.length > 0,
+  const data: LoaderData = results.map((category) => ({
+    categoryName: category.name,
+    categoryDisplay: category.display,
+    media: category.media.map((mediaItem) => ({
+      ...mediaItem,
+      imageSlug: mediaItem.image,
+      category: mediaItem.category.display,
+      isBookmarked: true,
     })),
-  }
+  }))
   return json(data)
 }
 
 export default function CatalogType(): JSX.Element {
   const data = useLoaderData<LoaderData>()
-  const searchLabel = `Search for ${getCategoryTitle(data.categoryName)}`
+
+  const categoryData = data.filter((category) => category.media.length > 0)
   return (
     <>
-      <Form method="get" action="/media/search">
+      <Form method="get" action="/search">
         <SearchInput
           inputProps={{ id: 'search', name: 'query' }}
-          label={searchLabel}
+          label={`Search for bookmarked shows`}
         />
-        <input type="hidden" name="category" value={data.categoryName} />
+        <input type="hidden" name="bookmarked" value="true" />
       </Form>
-      <div className="stack">
-        <Heading level={2} size="l">
-          {getCategoryTitle(data.categoryName)}
-        </Heading>
+      {categoryData.map((category) => (
+        <React.Fragment key={category.categoryName}>
+          <div className="stack">
+            <Heading level={2} size="l">
+              {getCategoryTitle(category.categoryName)}
+            </Heading>
 
-        <MediaGrid
-          items={data.media}
-          renderItem={(mediaItem) => (
-            <MediaCard
-              key={mediaItem.id}
-              id={mediaItem.id}
-              title={mediaItem.title}
-              year={mediaItem.year}
-              category={mediaItem.category}
-              rating={mediaItem.rating}
-              imageSlug={mediaItem.imageSlug}
-              isBookmarked={mediaItem.isBookmarked}
+            <MediaGrid
+              items={category.media}
+              renderItem={(mediaItem) => (
+                <MediaCard
+                  key={mediaItem.id}
+                  id={mediaItem.id}
+                  title={mediaItem.title}
+                  year={mediaItem.year}
+                  category={mediaItem.category}
+                  rating={mediaItem.rating}
+                  imageSlug={mediaItem.imageSlug}
+                  isBookmarked={mediaItem.isBookmarked}
+                />
+              )}
             />
-          )}
-        />
-      </div>
+          </div>
+        </React.Fragment>
+      ))}
+      {categoryData.length === 0 ? (
+        <Heading level={2} size="s">
+          You have no bookmarked items
+        </Heading>
+      ) : null}
     </>
   )
 }
