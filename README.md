@@ -37,8 +37,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Entertainment Web App](http://entertainment-web-app.vercel.app/)
+- Solution URL: [Entertainment Web App Frontendmentor Solution](https://www.frontendmentor.io/solutions/entertainment-app-full-stack-with-remix-HybIZLPQ5)
+- Live Site URL: [Entertainment Web App](https://entertainment-web-app.vercel.app/)
 
 You don't need a login to browse the site, but if you want to bookmark a show, you'll be prompted to set up an account.
 
