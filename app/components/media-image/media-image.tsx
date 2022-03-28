@@ -20,7 +20,7 @@ export function MediaImage({ imageSlug, isTrending }: Props): JSX.Element {
   const regularSrcSet = `
     ${imageBasePath}/small.jpg 328w,
     ${imageBasePath}/medium.jpg 440w,
-    ${imageBasePath}/large.jpg 560w,
+    ${imageBasePath}/large.jpg 560w
   `
   const srcSet = isTrending ? trendingSrcSet : regularSrcSet
 
