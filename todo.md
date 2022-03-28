@@ -1,4 +1,3 @@
-Add buttons to reel
 stop using useLocation
 extract image logic
 write readme
