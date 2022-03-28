@@ -50,17 +50,22 @@ body {
   font-weight: var(--font-weight-light);
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-400-75pc) var(--gray-100);
+}
+
 *::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--gray-100); /* color of the tracking area */
+  background: var(--gray-100);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--gray-400-75pc); /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 5px solid var(--gray-100); /* color of the tracking area */ /* creates padding around scroll thumb */
+  background-color: var(--gray-400-75pc);
+  border-radius: 20px;
+  border: 5px solid var(--gray-100);
 }
