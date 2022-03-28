@@ -29,6 +29,6 @@
   transition: opacity 0.5s linear;
 }
 
-.media-reel > li[inert] {
+.media-reel > .faded {
   opacity: 0.3;
 }
