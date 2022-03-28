@@ -19,7 +19,6 @@ export function SearchInput({ inputProps, label }: Props): JSX.Element {
         type="search"
         placeholder={label}
         autoComplete="off"
-        autoCorrect="off"
         autoCapitalize="off"
         className="font-size-400"
         {...inputProps}
